@@ -29,20 +29,10 @@ class PullMenuViewController: UIViewController {
 
     private func setupConstraints()
     {
-        menuView.autoSetDimension(
-            ALDimension.Width,
-            toSize: view.bounds.width
-        )
-        
         menuView.autoPinEdgeToSuperviewEdge(ALEdge.Top)
         menuView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
         menuView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
         
-        contentView.autoSetDimension(
-            ALDimension.Width,
-            toSize: view.bounds.width
-        )
-
         contentView.autoPinEdge(
             ALEdge.Top,
             toEdge: ALEdge.Bottom,
