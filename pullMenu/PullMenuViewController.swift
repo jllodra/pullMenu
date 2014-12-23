@@ -11,7 +11,8 @@ import UIKit
 class PullMenuViewController: UIViewController {
 
     private lazy var menuView: PullMenuMenuView = {
-        let obj = PullMenuMenuView(forAutoLayout: ())
+        //let obj = PullMenuMenuView(forAutoLayout: ()) // FIXME
+        let obj = PullMenuMenuView()
         
         return obj
     }()    
