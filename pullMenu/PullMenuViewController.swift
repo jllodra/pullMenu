@@ -26,6 +26,7 @@ class PullMenuViewController: UIViewController {
     private func addControls() {
         view.addSubview(menuView)
         view.addSubview(contentView)
+        view.bringSubviewToFront(menuView)
     }
 
     private func setupConstraints() {

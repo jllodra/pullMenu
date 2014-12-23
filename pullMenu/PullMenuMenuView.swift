@@ -18,6 +18,14 @@ class PullMenuMenuView: UIView {
     
     internal func handlePanning(recognizer: UIPanGestureRecognizer) {
         NSLog("Gesture recognized")
+        var velocity:CGPoint = recognizer.velocityInView(self)
+        var f:CGRect = self.frame
+        if(velocity.y > 0) {
+            f.size.height += 1
+        } else {
+            f.size.height -= 1
+        }
+        self.frame = f
     }
     
     override init() {
