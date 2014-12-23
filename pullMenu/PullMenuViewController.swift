@@ -27,8 +27,7 @@ class PullMenuViewController: UIViewController {
         view.addSubview(contentView)
     }
 
-    private func setupConstraints()
-    {
+    private func setupConstraints() {
         menuView.autoPinEdgeToSuperviewEdge(ALEdge.Top)
         menuView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
         menuView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
@@ -38,13 +37,12 @@ class PullMenuViewController: UIViewController {
             toEdge: ALEdge.Bottom,
             ofView: menuView
         )
-
-        contentView.autoMatchDimension(
+        
+        menuView.autoSetDimension(
             ALDimension.Height,
-            toDimension: ALDimension.Height,
-            ofView: menuView
+            toSize: 80
         )
-
+        
         contentView.autoPinEdgeToSuperviewEdge(ALEdge.Bottom)
         contentView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
         contentView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
