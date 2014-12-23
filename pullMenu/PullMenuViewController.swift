@@ -32,15 +32,15 @@ class PullMenuViewController: UIViewController {
         menuView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
         menuView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
         
+        menuView.autoSetDimension(
+            ALDimension.Height,
+            toSize: 80
+        )
+        
         contentView.autoPinEdge(
             ALEdge.Top,
             toEdge: ALEdge.Bottom,
             ofView: menuView
-        )
-        
-        menuView.autoSetDimension(
-            ALDimension.Height,
-            toSize: 80
         )
         
         contentView.autoPinEdgeToSuperviewEdge(ALEdge.Bottom)
