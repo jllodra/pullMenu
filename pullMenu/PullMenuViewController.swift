@@ -27,8 +27,13 @@ class PullMenuViewController: UIViewController {
         view.addSubview(contentView)
     }
     
+    private func debug() {
+        view.backgroundColor = UIColor.blackColor()
+    }
+    
     override func viewDidLoad() {
         addControls()
+        debug()
     }
 
 }
