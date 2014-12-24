@@ -69,21 +69,22 @@ class PullMenuTabBarProxyView: UIView {
             }
 
             if let items = tabBar?.items as? Array<UITabBarItem> {
+                var labelViews: Array<UIView> = Array()
 
-                let dummyLabel = UILabel(forAutoLayout: ())
-                dummyLabel.text = " "
-                dummyLabel.backgroundColor = UIColor.orangeColor()
+                let leftFillerView = UIView(forAutoLayout: ())
                 
-                scrollView.addSubview(dummyLabel)
+                scrollView.addSubview(leftFillerView)
                 
-                dummyLabel.autoMatchDimension(ALDimension.Width,
+                leftFillerView.autoMatchDimension(ALDimension.Width,
                     toDimension: ALDimension.Width,
                     ofView: scrollView,
                     withMultiplier: 0.33
                 )
                 
-                dummyLabel.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
+                leftFillerView.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
                 
+                labelViews.append(leftFillerView)
+               
                 for item in items
                 {
                     let label = UILabel(forAutoLayout: ())
@@ -101,23 +102,26 @@ class PullMenuTabBarProxyView: UIView {
                     )
                     
                     label.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
+
+                    labelViews.append(label)
                 }
                 
-                let dummyLabel2 = UILabel(forAutoLayout: ())
-                dummyLabel2.text = " "
-                dummyLabel2.backgroundColor = UIColor.orangeColor()
+                let rightFillerView = UIView(forAutoLayout: ())
+                rightFillerView.backgroundColor = UIColor.orangeColor()
                 
-                scrollView.addSubview(dummyLabel2)
+                scrollView.addSubview(rightFillerView)
                 
-                dummyLabel2.autoMatchDimension(ALDimension.Width,
+                rightFillerView.autoMatchDimension(ALDimension.Width,
                     toDimension: ALDimension.Width,
                     ofView: scrollView,
                     withMultiplier: 0.33
                 )
                 
-                dummyLabel2.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
+                rightFillerView.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
 
-                let views = scrollView.subviews as NSArray
+                labelViews.append(rightFillerView)
+                
+                let views = labelViews as NSArray
 
                 views.autoDistributeViewsAlongAxis(ALAxis.Horizontal,
                     alignedTo: ALAttribute.Horizontal,
