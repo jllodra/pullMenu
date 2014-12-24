@@ -115,9 +115,7 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
                 outMaxV: CGFloat(numberOfItemsInTabBar - 1)
             )
             
-            let selectedItem = abs(max(0, Int(round(mappedItem))))
-            
-            println(selectedItem)
+            selectedIndex = abs(max(0, Int(round(mappedItem))))
         }
     }
 }
