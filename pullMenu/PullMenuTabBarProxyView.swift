@@ -17,8 +17,16 @@ class PullMenuTabBarProxyView: UIView {
     var delegate: PullMenuTabBarProxyViewDelegate?
     var tabBar: UITabBar?
 
-    private var areLabelsSet: Bool = false
+    private var didSetupConstraints: Bool = false
     
+    private lazy var scrollView: UIScrollView = {
+        let obj = UIScrollView(forAutoLayout: ())
+        
+        obj.scrollEnabled = false
+        
+        return obj
+    }()
+
     private lazy var pgr: UIPanGestureRecognizer = {
         let obj = UIPanGestureRecognizer(target: self, action: "handlePanning:")
         
@@ -46,28 +54,32 @@ class PullMenuTabBarProxyView: UIView {
     }
     
     override func updateConstraints() {
-        if (!areLabelsSet)
+        if (!didSetupConstraints)
         {
             if let items = tabBar?.items as? Array<UITabBarItem> {
                 for item in items
                 {
                     println(item.title)
                     
+                    addSubview(scrollView)
+
+                    scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Top)
+                    scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Bottom)
+                    scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
+                    scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
+                    
                     let label = UILabel(forAutoLayout: ())
                     
                     label.text = item.title
                     label.textAlignment = NSTextAlignment.Center
+                    
+                    // TODO: Add label constraints so items are spread across the X-axis
 
-                    addSubview(label)
-
-                    label.autoPinEdgeToSuperviewEdge(ALEdge.Top)
-                    label.autoPinEdgeToSuperviewEdge(ALEdge.Bottom)
-                    label.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
-                    label.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
+                    scrollView.addSubview(label)
                 }
             }
             
-            areLabelsSet = true
+            didSetupConstraints = true
         }
 
         super.updateConstraints()
