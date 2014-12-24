@@ -64,7 +64,6 @@ class PullMenuViewController: UIViewController, PullMenuMenuViewDelegate {
     
     override func viewDidLoad() {
         addControls()
-        view.setNeedsUpdateConstraints()
         debug()
     }
 
@@ -73,6 +72,7 @@ class PullMenuViewController: UIViewController, PullMenuMenuViewDelegate {
     private func addControls() {
         view.addSubview(menuView)
         view.addSubview(contentView)
+        view.setNeedsUpdateConstraints()
     }
     
     private func debug() {
