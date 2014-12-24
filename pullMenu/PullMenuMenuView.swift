@@ -8,8 +8,14 @@
 
 import UIKit
 
+protocol PullMenuMenuViewDelegate {
+    func pullMenuMenuView(pullMenuMenuView: PullMenuMenuView, wantsToChangeHeightTo height: CGFloat)
+}
+
 class PullMenuMenuView: UIView {
 
+    var delegate: PullMenuMenuViewDelegate?
+    
     private lazy var pgr: UIPanGestureRecognizer = {
         let obj = UIPanGestureRecognizer(target: self, action: "handlePanning:")
         
@@ -20,12 +26,12 @@ class PullMenuMenuView: UIView {
         NSLog("Gesture recognized")
         var velocity:CGPoint = recognizer.velocityInView(self)
         var f:CGRect = self.frame
-        if(velocity.y > 0) {
-            f.size.height += 1
+
+        if (velocity.y > 0) {
+            delegate?.pullMenuMenuView(self, wantsToChangeHeightTo: f.size.height + 1)
         } else {
-            f.size.height -= 1
+            delegate?.pullMenuMenuView(self, wantsToChangeHeightTo: f.size.height - 1)
         }
-        self.frame = f
     }
     
     override init() {

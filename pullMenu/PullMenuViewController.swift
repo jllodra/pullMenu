@@ -8,11 +8,21 @@
 
 import UIKit
 
-class PullMenuViewController: UIViewController {
+class PullMenuViewController: UIViewController, PullMenuMenuViewDelegate {
 
+    struct DefaultDimensions {
+        static let menuViewHeight: CGFloat = 80.0
+    }
+    
+    var didSetupConstraints: Bool = false
+    var menuViewHeightConstraint: NSLayoutConstraint?
+
+    // MARK: Accessors
+    
     private lazy var menuView: PullMenuMenuView = {
-        //let obj = PullMenuMenuView(forAutoLayout: ()) // FIXME
-        let obj = PullMenuMenuView()
+        let obj = PullMenuMenuView(forAutoLayout: ())
+        
+        obj.delegate = self
         
         return obj
     }()    
@@ -22,32 +32,47 @@ class PullMenuViewController: UIViewController {
         
         return obj
     }()
+    
+    // MARK: Public Methods
+    
+    override func updateViewConstraints() {
+        if (!didSetupConstraints) {
+            menuView.autoPinEdgeToSuperviewEdge(ALEdge.Top)
+            menuView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
+            menuView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
+            
+            menuViewHeightConstraint = self.menuView.autoSetDimension(
+                ALDimension.Height,
+                toSize: DefaultDimensions.menuViewHeight
+            )
+            
+            contentView.autoPinEdge(
+                ALEdge.Top,
+                toEdge: ALEdge.Bottom,
+                ofView: menuView
+            )
+            
+            contentView.autoPinEdgeToSuperviewEdge(ALEdge.Bottom)
+            contentView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
+            contentView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
+            
+            didSetupConstraints = true
+        }
+        
+        super.updateViewConstraints()
+    }
+    
+    override func viewDidLoad() {
+        addControls()
+        view.setNeedsUpdateConstraints()
+        debug()
+    }
 
+    // MARK: Private Methods
+    
     private func addControls() {
         view.addSubview(menuView)
         view.addSubview(contentView)
-        view.bringSubviewToFront(menuView)
-    }
-
-    private func setupConstraints() {
-        menuView.autoPinEdgeToSuperviewEdge(ALEdge.Top)
-        menuView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
-        menuView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
-        
-        menuView.autoSetDimension(
-            ALDimension.Height,
-            toSize: 80
-        )
-        
-        contentView.autoPinEdge(
-            ALEdge.Top,
-            toEdge: ALEdge.Bottom,
-            ofView: menuView
-        )
-        
-        contentView.autoPinEdgeToSuperviewEdge(ALEdge.Bottom)
-        contentView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
-        contentView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
     }
     
     private func debug() {
@@ -57,11 +82,12 @@ class PullMenuViewController: UIViewController {
         
         println("view.subviews = %d", view.subviews)
     }
-    
-    override func viewDidLoad() {
-        addControls()
-        setupConstraints()
-        debug()
-    }
+}
 
+extension PullMenuViewController : PullMenuMenuViewDelegate {
+
+    func pullMenuMenuView(pullMenuMenuView: PullMenuMenuView, wantsToChangeHeightTo height: CGFloat) {
+        menuViewHeightConstraint?.constant = height
+        view.layoutIfNeeded()
+    }
 }
