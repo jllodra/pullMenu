@@ -16,6 +16,8 @@ class PullMenuTabBarProxyView: UIView {
 
     var delegate: PullMenuTabBarProxyViewDelegate?
     var tabBar: UITabBar?
+
+    private var areLabelsSet: Bool = false
     
     private lazy var pgr: UIPanGestureRecognizer = {
         let obj = UIPanGestureRecognizer(target: self, action: "handlePanning:")
@@ -41,6 +43,34 @@ class PullMenuTabBarProxyView: UIView {
             default:
                 break
         }
+    }
+    
+    override func updateConstraints() {
+        if (!areLabelsSet)
+        {
+            if let items = tabBar?.items as? Array<UITabBarItem> {
+                for item in items
+                {
+                    println(item.title)
+                    
+                    let label = UILabel(forAutoLayout: ())
+                    
+                    label.text = item.title
+                    label.textAlignment = NSTextAlignment.Center
+
+                    addSubview(label)
+
+                    label.autoPinEdgeToSuperviewEdge(ALEdge.Top)
+                    label.autoPinEdgeToSuperviewEdge(ALEdge.Bottom)
+                    label.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
+                    label.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
+                }
+            }
+            
+            areLabelsSet = true
+        }
+
+        super.updateConstraints()
     }
     
     override init() {
