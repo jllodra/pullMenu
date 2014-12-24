@@ -60,6 +60,8 @@ class PullMenuTabBarProxyView: UIView {
             {
                 addSubview(scrollView)
 
+                scrollView.backgroundColor = UIColor.purpleColor()
+                
                 scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Top)
                 scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Bottom)
                 scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
@@ -73,11 +75,22 @@ class PullMenuTabBarProxyView: UIView {
                     
                     label.text = item.title
                     label.textAlignment = NSTextAlignment.Center
+                    label.backgroundColor = UIColor.greenColor()
                     
-                    // TODO: Add label constraints so items are spread across the X-axis
-
                     scrollView.addSubview(label)
+
+                    label.autoPinEdgeToSuperviewEdge(ALEdge.Top, withInset: 30)
+                    label.autoPinEdgeToSuperviewEdge(ALEdge.Bottom, withInset: 30)
                 }
+                
+                let views = scrollView.subviews as NSArray
+
+                views.autoDistributeViewsAlongAxis(ALAxis.Horizontal,
+                    alignedTo: ALAttribute.Horizontal,
+                    withFixedSpacing: 10.0,
+                    insetSpacing: true,
+                    matchedSizes: true
+                )
             }
             
             didSetupConstraints = true
