@@ -22,15 +22,20 @@ class PullMenuMenuView: UIView {
         return obj
     }()
     
+    private var initialHeight: CGFloat = 0.0
+    
     internal func handlePanning(recognizer: UIPanGestureRecognizer) {
-        NSLog("Gesture recognized")
-        var velocity:CGPoint = recognizer.velocityInView(self)
-        var f:CGRect = self.frame
-
-        if (velocity.y > 0) {
-            delegate?.pullMenuMenuView(self, wantsToChangeHeightTo: f.size.height + 1)
-        } else {
-            delegate?.pullMenuMenuView(self, wantsToChangeHeightTo: f.size.height - 1)
+        if recognizer.state == UIGestureRecognizerState.Began
+        {
+            initialHeight = self.frame.height
+        }
+        else if recognizer.state == UIGestureRecognizerState.Changed
+        {
+            NSLog("Gesture recognized")
+            
+            var translationPoint = recognizer.translationInView(self)
+            
+            delegate?.pullMenuMenuView(self, wantsToChangeHeightTo: initialHeight + translationPoint.y)
         }
     }
     
