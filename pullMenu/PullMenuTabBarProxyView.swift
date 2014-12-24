@@ -22,7 +22,7 @@ class PullMenuTabBarProxyView: UIView {
     private lazy var scrollView: UIScrollView = {
         let obj = UIScrollView(forAutoLayout: ())
         
-        obj.scrollEnabled = false
+        //obj.scrollEnabled = false
         
         return obj
     }()
@@ -79,6 +79,12 @@ class PullMenuTabBarProxyView: UIView {
                     
                     scrollView.addSubview(label)
 
+                    label.autoMatchDimension(ALDimension.Width,
+                        toDimension: ALDimension.Width,
+                        ofView: self,
+                        withMultiplier: 0.5
+                    )
+
                     label.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
                 }
                 
@@ -88,7 +94,7 @@ class PullMenuTabBarProxyView: UIView {
                     alignedTo: ALAttribute.Horizontal,
                     withFixedSpacing: 10.0,
                     insetSpacing: true,
-                    matchedSizes: true
+                    matchedSizes: false
                 )
             }
             
