@@ -54,20 +54,21 @@ class PullMenuTabBarProxyView: UIView {
     }
     
     override func updateConstraints() {
-        if (!didSetupConstraints)
+        if !didSetupConstraints
         {
+            if !contains(subviews as Array<UIView>, scrollView)
+            {
+                addSubview(scrollView)
+
+                scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Top)
+                scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Bottom)
+                scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
+                scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
+            }
+
             if let items = tabBar?.items as? Array<UITabBarItem> {
                 for item in items
                 {
-                    println(item.title)
-                    
-                    addSubview(scrollView)
-
-                    scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Top)
-                    scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Bottom)
-                    scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
-                    scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
-                    
                     let label = UILabel(forAutoLayout: ())
                     
                     label.text = item.title
