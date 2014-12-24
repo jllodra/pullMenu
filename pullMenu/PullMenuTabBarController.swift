@@ -86,13 +86,9 @@ class PullMenuTabBarController: UITabBarController, PullMenuTabBarProxyViewDeleg
 extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
 
     func pullMenuTabBarProxyView(pullMenuTabBarProxyView: PullMenuTabBarProxyView, wantsToChangeHeightTo height: CGFloat, withAnimation: Bool) {
+        var targetHeight = height
         let maxHeight = self.view.frame.height / 2.0
         
-        if (height > maxHeight)
-        {
-            return
-        }
-
         if (withAnimation)
         {
             UIView.animateWithDuration(Config.animationTime,
@@ -101,26 +97,29 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
                 initialSpringVelocity: Config.animationInitialSpringVelocity,
                 options: nil,
                 animations: {
-                    let numberOfItemsInTabBar = self.tabBar.items!.count
-                    
-                    let mappedItem = self.mapValue(height,
-                        minV: Config.menuViewHeight,
-                        maxV: maxHeight,
-                        outMinV: 0.0,
-                        outMaxV: CGFloat(numberOfItemsInTabBar)
-                    )
-                    
-                    let selectedItem = abs(max(0, min(numberOfItemsInTabBar - 1, Int(round(mappedItem)))))
-                    
-                    println(selectedItem)
-
                     self.menuViewHeightConstraint?.constant = height
                     self.view.layoutIfNeeded()
                 },
                 completion: {success in}
             )
-        } else {
-            self.menuViewHeightConstraint?.constant = height
+        }
+        else
+        {
+            targetHeight = min(height, maxHeight)
+            let numberOfItemsInTabBar = self.tabBar.items!.count
+            
+            let mappedItem = self.mapValue(targetHeight,
+                minV: Config.menuViewHeight,
+                maxV: maxHeight,
+                outMinV: 0.0,
+                outMaxV: CGFloat(numberOfItemsInTabBar)
+            )
+            
+            let selectedItem = abs(max(0, min(numberOfItemsInTabBar - 1, Int(round(mappedItem)))))
+            
+            println(selectedItem)
+            
+            self.menuViewHeightConstraint?.constant = targetHeight
             self.view.layoutIfNeeded()
         }
     }
