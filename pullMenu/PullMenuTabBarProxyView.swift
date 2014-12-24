@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PullMenuTabBarProxyViewDelegate {
-    func pullMenuTabBarProxyView(pullMenuMenuView: PullMenuTabBarProxyView, wantsToChangeHeightTo height: CGFloat)
+    func pullMenuTabBarProxyView(pullMenuMenuView: PullMenuTabBarProxyView, wantsToChangeHeightTo height: CGFloat, withAnimation: Bool)
 }
 
 class PullMenuTabBarProxyView: UIView {
@@ -33,10 +33,10 @@ class PullMenuTabBarProxyView: UIView {
             case UIGestureRecognizerState.Changed:
                 var translationPoint = recognizer.translationInView(self)
 
-                delegate?.pullMenuTabBarProxyView(self, wantsToChangeHeightTo: initialHeight + translationPoint.y)
+                delegate?.pullMenuTabBarProxyView(self, wantsToChangeHeightTo: initialHeight + translationPoint.y, withAnimation: false)
                 break
             case UIGestureRecognizerState.Ended:
-                self.delegate?.pullMenuTabBarProxyView(self, wantsToChangeHeightTo: self.initialHeight)
+                delegate?.pullMenuTabBarProxyView(self, wantsToChangeHeightTo: self.initialHeight, withAnimation: true)
                 break
             default:
                 break
@@ -45,13 +45,13 @@ class PullMenuTabBarProxyView: UIView {
     
     override init() {
         super.init()
-        NSLog("PullMenuMenuView init")
+        NSLog("PullMenuTabBarProxyView init")
         addGestureRecognizer(pgr)
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        NSLog("PullMenuMenuView init with frame")
+        NSLog("PullMenuTabBarProxyView init with frame")
     }
 
     required init(coder aDecoder: NSCoder) {
