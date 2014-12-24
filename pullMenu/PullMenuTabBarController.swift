@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PullMenuViewController: UIViewController, PullMenuMenuViewDelegate {
+class PullMenuTabBarController: UITabBarController, PullMenuTabBarProxyViewDelegate {
 
     struct Config {
         static let menuViewHeight: CGFloat = 80.0
@@ -23,42 +23,39 @@ class PullMenuViewController: UIViewController, PullMenuMenuViewDelegate {
     
     // MARK: Accessors
     
-    private lazy var menuView: PullMenuMenuView = {
-        let obj = PullMenuMenuView(forAutoLayout: ())
+    private lazy var tabBarProxyView: PullMenuTabBarProxyView = {
+        let obj = PullMenuTabBarProxyView(forAutoLayout: ())
         
         obj.delegate = self
+        obj.tabBar = self.tabBar
         
         return obj
     }()    
 
-    private lazy var contentView: UIView = {
-        let obj = UIView(forAutoLayout: ())
-        
-        return obj
-    }()
-    
     // MARK: Public Methods
     
     override func updateViewConstraints() {
         if (!didSetupConstraints) {
-            menuView.autoPinEdgeToSuperviewEdge(ALEdge.Top)
-            menuView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
-            menuView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
+            tabBarProxyView.autoPinEdgeToSuperviewEdge(ALEdge.Top)
+            tabBarProxyView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
+            tabBarProxyView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
             
-            menuViewHeightConstraint = self.menuView.autoSetDimension(
+            menuViewHeightConstraint = tabBarProxyView.autoSetDimension(
                 ALDimension.Height,
                 toSize: Config.menuViewHeight
             )
             
-            contentView.autoPinEdge(
+            let transitionView = view.subviews[0] as UIView
+
+            transitionView.autoPinEdge(
                 ALEdge.Top,
                 toEdge: ALEdge.Bottom,
-                ofView: menuView
+                ofView: tabBarProxyView
             )
             
-            contentView.autoPinEdgeToSuperviewEdge(ALEdge.Bottom)
-            contentView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
-            contentView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
+            transitionView.autoPinEdgeToSuperviewEdge(ALEdge.Bottom)
+            transitionView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
+            transitionView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
             
             didSetupConstraints = true
         }
@@ -67,6 +64,8 @@ class PullMenuViewController: UIViewController, PullMenuMenuViewDelegate {
     }
     
     override func viewDidLoad() {
+        tabBar.hidden = true
+
         addControls()
         debug()
     }
@@ -74,21 +73,19 @@ class PullMenuViewController: UIViewController, PullMenuMenuViewDelegate {
     // MARK: Private Methods
     
     private func addControls() {
-        view.addSubview(menuView)
-        view.addSubview(contentView)
+        view.addSubview(tabBarProxyView)
         view.setNeedsUpdateConstraints()
     }
     
     private func debug() {
-        view.backgroundColor = UIColor.blackColor()
-        menuView.backgroundColor = UIColor.greenColor()
-        contentView.backgroundColor = UIColor.blueColor()
+        view.backgroundColor = UIColor.grayColor()
+        tabBarProxyView.backgroundColor = UIColor.darkGrayColor()
     }
 }
 
-extension PullMenuViewController : PullMenuMenuViewDelegate {
+extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
 
-    func pullMenuMenuView(pullMenuMenuView: PullMenuMenuView, wantsToChangeHeightTo height: CGFloat) {
+    func pullMenuTabBarProxyView(pullMenuTabBarProxyView: PullMenuTabBarProxyView, wantsToChangeHeightTo height: CGFloat) {
         UIView.animateWithDuration(Config.animationTime,
             delay: Config.animationDelay,
             usingSpringWithDamping: Config.animationSpringWithDamping,

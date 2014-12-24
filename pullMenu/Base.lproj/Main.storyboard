@@ -1,15 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="pOm-x9-qFF">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--Pull Menu View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Item 2-->
+        <scene sceneID="hNw-Ec-Uaa">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="PullMenuViewController" customModule="pullMenu" customModuleProvider="target" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <viewController id="wnP-au-gdM" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5DF-d4-j6k"/>
+                        <viewControllerLayoutGuide type="bottom" id="ISC-YT-8NJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fxm-uD-iDp">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93496227264404297" green="0.94916123151779175" blue="0.99980872869491577" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="gBV-Et-Qtl"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qpQ-le-cia" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="755" y="703"/>
+        </scene>
+        <!--Item 1-->
+        <scene sceneID="brs-RK-zaL">
+            <objects>
+                <viewController id="e28-Pc-mbF" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DfH-1d-C0i"/>
+                        <viewControllerLayoutGuide type="bottom" id="JEG-xg-EFw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ABY-r0-c5t">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.91261130571365356" green="0.95325356721878052" blue="0.89679992198944092" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="PRM-0t-5TN"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k2B-Vk-1JT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="755" y="41"/>
+        </scene>
+        <!--Pull Menu Tab Bar Controller-->
+        <scene sceneID="xoQ-jl-Tx5">
+            <objects>
+                <tabBarController id="pOm-x9-qFF" customClass="PullMenuTabBarController" customModule="pullMenu" customModuleProvider="target" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="QzC-jD-7Tj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="e28-Pc-mbF" kind="relationship" relationship="viewControllers" id="F7W-nb-ptI"/>
+                        <segue destination="wnP-au-gdM" kind="relationship" relationship="viewControllers" id="Hcr-OS-LWc"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bBz-4j-fSd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-65" y="372"/>
         </scene>
     </scenes>
 </document>

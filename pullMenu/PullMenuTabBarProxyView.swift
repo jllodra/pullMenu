@@ -8,13 +8,14 @@
 
 import UIKit
 
-protocol PullMenuMenuViewDelegate {
-    func pullMenuMenuView(pullMenuMenuView: PullMenuMenuView, wantsToChangeHeightTo height: CGFloat)
+protocol PullMenuTabBarProxyViewDelegate {
+    func pullMenuTabBarProxyView(pullMenuMenuView: PullMenuTabBarProxyView, wantsToChangeHeightTo height: CGFloat)
 }
 
-class PullMenuMenuView: UIView {
+class PullMenuTabBarProxyView: UIView {
 
-    var delegate: PullMenuMenuViewDelegate?
+    var delegate: PullMenuTabBarProxyViewDelegate?
+    var tabBar: UITabBar?
     
     private lazy var pgr: UIPanGestureRecognizer = {
         let obj = UIPanGestureRecognizer(target: self, action: "handlePanning:")
@@ -32,10 +33,10 @@ class PullMenuMenuView: UIView {
             case UIGestureRecognizerState.Changed:
                 var translationPoint = recognizer.translationInView(self)
 
-                delegate?.pullMenuMenuView(self, wantsToChangeHeightTo: initialHeight + translationPoint.y)
+                delegate?.pullMenuTabBarProxyView(self, wantsToChangeHeightTo: initialHeight + translationPoint.y)
                 break
             case UIGestureRecognizerState.Ended:
-                self.delegate?.pullMenuMenuView(self, wantsToChangeHeightTo: self.initialHeight)
+                self.delegate?.pullMenuTabBarProxyView(self, wantsToChangeHeightTo: self.initialHeight)
                 break
             default:
                 break

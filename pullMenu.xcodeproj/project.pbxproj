@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		457937911A49DFD20051400A /* PullMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457937901A49DFD20051400A /* PullMenuViewController.swift */; };
-		457937931A49DFE70051400A /* PullMenuMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457937921A49DFE70051400A /* PullMenuMenuView.swift */; };
+		457937911A49DFD20051400A /* PullMenuTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457937901A49DFD20051400A /* PullMenuTabBarController.swift */; };
+		457937931A49DFE70051400A /* PullMenuTabBarProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457937921A49DFE70051400A /* PullMenuTabBarProxyView.swift */; };
 		72CFF4801A49C84A00943D6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CFF47F1A49C84A00943D6B /* AppDelegate.swift */; };
 		72CFF4821A49C84A00943D6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CFF4811A49C84A00943D6B /* ViewController.swift */; };
 		72CFF4851A49C84A00943D6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72CFF4831A49C84A00943D6B /* Main.storyboard */; };
@@ -30,8 +30,8 @@
 
 /* Begin PBXFileReference section */
 		2CECF3B37AB6BDE9943E6C08 /* libPods-pullMenu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pullMenu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		457937901A49DFD20051400A /* PullMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullMenuViewController.swift; sourceTree = "<group>"; };
-		457937921A49DFE70051400A /* PullMenuMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullMenuMenuView.swift; sourceTree = "<group>"; };
+		457937901A49DFD20051400A /* PullMenuTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullMenuTabBarController.swift; sourceTree = "<group>"; };
+		457937921A49DFE70051400A /* PullMenuTabBarProxyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullMenuTabBarProxyView.swift; sourceTree = "<group>"; };
 		457937941A49E0FC0051400A /* pullMenu-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "pullMenu-Bridging-Header.h"; sourceTree = "<group>"; };
 		72CFF47A1A49C84A00943D6B /* pullMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pullMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72CFF47E1A49C84A00943D6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -104,8 +104,8 @@
 				72CFF4861A49C84A00943D6B /* Images.xcassets */,
 				72CFF4881A49C84A00943D6B /* LaunchScreen.xib */,
 				72CFF47D1A49C84A00943D6B /* Supporting Files */,
-				457937901A49DFD20051400A /* PullMenuViewController.swift */,
-				457937921A49DFE70051400A /* PullMenuMenuView.swift */,
+				457937901A49DFD20051400A /* PullMenuTabBarController.swift */,
+				457937921A49DFE70051400A /* PullMenuTabBarProxyView.swift */,
 				457937941A49E0FC0051400A /* pullMenu-Bridging-Header.h */,
 			);
 			path = pullMenu;
@@ -279,10 +279,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				457937911A49DFD20051400A /* PullMenuViewController.swift in Sources */,
+				457937911A49DFD20051400A /* PullMenuTabBarController.swift in Sources */,
 				72CFF4821A49C84A00943D6B /* ViewController.swift in Sources */,
 				72CFF4801A49C84A00943D6B /* AppDelegate.swift in Sources */,
-				457937931A49DFE70051400A /* PullMenuMenuView.swift in Sources */,
+				457937931A49DFE70051400A /* PullMenuTabBarProxyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
