@@ -85,11 +85,11 @@ class PullMenuTabBarController: UITabBarController, PullMenuTabBarProxyViewDeleg
 
 extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
 
-    func pullMenuTabBarProxyView(pullMenuTabBarProxyView: PullMenuTabBarProxyView, wantsToChangeHeightTo height: CGFloat, withAnimation: Bool) {
+    func pullMenuTabBarProxyView(pullMenuTabBarProxyView: PullMenuTabBarProxyView, wantsToChangeHeightTo height: CGFloat, isDragging: Bool) {
         let maxHeight = self.view.frame.height / 2.0
-        var targetHeight = min(height, maxHeight)
+        let targetHeight = min(height, maxHeight)
         
-        if (withAnimation)
+        if (!isDragging)
         {
             UIView.animateWithDuration(Config.animationTime,
                 delay: Config.animationDelay,
@@ -107,20 +107,20 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
         {            
             self.menuViewHeightConstraint?.constant = targetHeight
             self.view.layoutIfNeeded()
-        }
 
-        let numberOfItemsInTabBar = self.tabBar.items!.count
-        
-        let mappedItem = self.mapValue(targetHeight,
-            minV: Config.menuViewHeight,
-            maxV: maxHeight,
-            outMinV: 0.0,
-            outMaxV: CGFloat(numberOfItemsInTabBar)
-        )
-        
-        let selectedItem = abs(max(0, min(numberOfItemsInTabBar - 1, Int(round(mappedItem)))))
-        
-        println(selectedItem)
+            let numberOfItemsInTabBar = self.tabBar.items!.count
+            
+            let mappedItem = self.mapValue(targetHeight,
+                minV: Config.menuViewHeight,
+                maxV: maxHeight,
+                outMinV: 0.0,
+                outMaxV: CGFloat(numberOfItemsInTabBar)
+            )
+            
+            let selectedItem = abs(max(0, min(numberOfItemsInTabBar - 1, Int(round(mappedItem)))))
+            
+            println(selectedItem)
+        }
     }
 
     private func mapValue(v: CGFloat, minV: CGFloat, maxV: CGFloat, outMinV: CGFloat, outMaxV: CGFloat) -> CGFloat {

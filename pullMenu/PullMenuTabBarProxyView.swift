@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PullMenuTabBarProxyViewDelegate {
-    func pullMenuTabBarProxyView(pullMenuMenuView: PullMenuTabBarProxyView, wantsToChangeHeightTo height: CGFloat, withAnimation: Bool)
+    func pullMenuTabBarProxyView(pullMenuMenuView: PullMenuTabBarProxyView, wantsToChangeHeightTo height: CGFloat, isDragging: Bool)
 }
 
 class PullMenuTabBarProxyView: UIView {
@@ -33,10 +33,10 @@ class PullMenuTabBarProxyView: UIView {
             case UIGestureRecognizerState.Changed:
                 var translationPoint = recognizer.translationInView(self)
 
-                delegate?.pullMenuTabBarProxyView(self, wantsToChangeHeightTo: initialHeight + translationPoint.y, withAnimation: false)
+                delegate?.pullMenuTabBarProxyView(self, wantsToChangeHeightTo: initialHeight + translationPoint.y, isDragging: true)
                 break
             case UIGestureRecognizerState.Ended:
-                delegate?.pullMenuTabBarProxyView(self, wantsToChangeHeightTo: self.initialHeight, withAnimation: true)
+                delegate?.pullMenuTabBarProxyView(self, wantsToChangeHeightTo: self.initialHeight, isDragging: false)
                 break
             default:
                 break
