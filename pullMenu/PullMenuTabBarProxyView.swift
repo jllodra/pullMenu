@@ -19,7 +19,6 @@ class PullMenuTabBarProxyView: UIView {
 
     private var didSetupConstraints: Bool = false
     private var labelViews: Array<UIView> = Array()
-    private var labelWidth: CGFloat = 0.0
     
     private lazy var scrollView: UIScrollView = {
         let obj = UIScrollView(forAutoLayout: ())
@@ -56,7 +55,8 @@ class PullMenuTabBarProxyView: UIView {
     }
     
     func scrollToLabel(index: Int) {
-        scrollView.setContentOffset(CGPointMake(CGFloat(index)*labelViews[0].frame.width, 0.0), animated: false)
+        let labelWidth = labelViews[0].frame.width
+        scrollView.setContentOffset(CGPointMake(CGFloat(index)*labelWidth, 0.0), animated: true)
     }
     
     override func updateConstraints() {
@@ -117,8 +117,6 @@ class PullMenuTabBarProxyView: UIView {
             
             didSetupConstraints = true
         }
-
-        labelWidth = labelViews[0].frame.width
 
         super.updateConstraints()
     }
