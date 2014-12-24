@@ -74,10 +74,10 @@ class PullMenuTabBarProxyView: UIView {
 
             if let items = tabBar?.items as? Array<UITabBarItem> {
 
-                var itemsToAdd: Array<AnyObject> = items
+                var itemsToAdd: Array<UITabBarItem?> = items
                 
-                itemsToAdd.insert(NSNull(), atIndex: 0)
-                itemsToAdd.append(NSNull())
+                itemsToAdd.insert(nil, atIndex: 0)
+                itemsToAdd.append(nil)
                                
                 for item in itemsToAdd
                 {
@@ -85,9 +85,9 @@ class PullMenuTabBarProxyView: UIView {
                     
                     // Treat non-UITabBarItem items as fillers
 
-                    if (item.isKindOfClass(UITabBarItem))
+                    if let tabBarItem = item
                     {
-                        label.text = item.title
+                        label.text = tabBarItem.title
                         label.textAlignment = NSTextAlignment.Center
                         label.backgroundColor = UIColor.greenColor()
                     }
