@@ -15,7 +15,7 @@ class PullMenuViewController: UIViewController, PullMenuMenuViewDelegate {
     }
     
     var didSetupConstraints: Bool = false
-    var menuViewHeightConstraint: NSLayoutConstraint?
+    internal var menuViewHeightConstraint: NSLayoutConstraint?
 
     // MARK: Accessors
     
