@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4537A3FE1A4AEE43001A485D /* PullMenuUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4537A3FD1A4AEE43001A485D /* PullMenuUtils.swift */; };
 		457937911A49DFD20051400A /* PullMenuTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457937901A49DFD20051400A /* PullMenuTabBarController.swift */; };
 		457937931A49DFE70051400A /* PullMenuTabBarProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457937921A49DFE70051400A /* PullMenuTabBarProxyView.swift */; };
 		72CFF4801A49C84A00943D6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CFF47F1A49C84A00943D6B /* AppDelegate.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		2CECF3B37AB6BDE9943E6C08 /* libPods-pullMenu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pullMenu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4537A3FD1A4AEE43001A485D /* PullMenuUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullMenuUtils.swift; sourceTree = "<group>"; };
 		457937901A49DFD20051400A /* PullMenuTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullMenuTabBarController.swift; sourceTree = "<group>"; };
 		457937921A49DFE70051400A /* PullMenuTabBarProxyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullMenuTabBarProxyView.swift; sourceTree = "<group>"; };
 		457937941A49E0FC0051400A /* pullMenu-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "pullMenu-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -100,12 +102,13 @@
 			children = (
 				72CFF47F1A49C84A00943D6B /* AppDelegate.swift */,
 				72CFF4811A49C84A00943D6B /* ViewController.swift */,
+				457937901A49DFD20051400A /* PullMenuTabBarController.swift */,
+				457937921A49DFE70051400A /* PullMenuTabBarProxyView.swift */,
+				4537A3FD1A4AEE43001A485D /* PullMenuUtils.swift */,
 				72CFF4831A49C84A00943D6B /* Main.storyboard */,
 				72CFF4861A49C84A00943D6B /* Images.xcassets */,
 				72CFF4881A49C84A00943D6B /* LaunchScreen.xib */,
 				72CFF47D1A49C84A00943D6B /* Supporting Files */,
-				457937901A49DFD20051400A /* PullMenuTabBarController.swift */,
-				457937921A49DFE70051400A /* PullMenuTabBarProxyView.swift */,
 				457937941A49E0FC0051400A /* pullMenu-Bridging-Header.h */,
 			);
 			path = pullMenu;
@@ -280,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				457937911A49DFD20051400A /* PullMenuTabBarController.swift in Sources */,
+				4537A3FE1A4AEE43001A485D /* PullMenuUtils.swift in Sources */,
 				72CFF4821A49C84A00943D6B /* ViewController.swift in Sources */,
 				72CFF4801A49C84A00943D6B /* AppDelegate.swift in Sources */,
 				457937931A49DFE70051400A /* PullMenuTabBarProxyView.swift in Sources */,
