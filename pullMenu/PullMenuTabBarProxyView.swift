@@ -28,7 +28,7 @@ class PullMenuTabBarProxyView: UIView {
     internal func handlePanning(recognizer: UIPanGestureRecognizer) {
         switch recognizer.state {
             case UIGestureRecognizerState.Began:
-                initialHeight = self.frame.height
+                initialHeight = frame.height
                 break
             case UIGestureRecognizerState.Changed:
                 var translationPoint = recognizer.translationInView(self)
@@ -36,7 +36,7 @@ class PullMenuTabBarProxyView: UIView {
                 delegate?.pullMenuTabBarProxyView(self, wantsToChangeHeightTo: initialHeight + translationPoint.y, isDragging: true)
                 break
             case UIGestureRecognizerState.Ended:
-                delegate?.pullMenuTabBarProxyView(self, wantsToChangeHeightTo: self.initialHeight, isDragging: false)
+                delegate?.pullMenuTabBarProxyView(self, wantsToChangeHeightTo: initialHeight, isDragging: false)
                 break
             default:
                 break

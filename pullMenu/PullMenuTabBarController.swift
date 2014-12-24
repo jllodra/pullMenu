@@ -84,7 +84,7 @@ class PullMenuTabBarController: UITabBarController, PullMenuTabBarProxyViewDeleg
 extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
 
     func pullMenuTabBarProxyView(pullMenuTabBarProxyView: PullMenuTabBarProxyView, wantsToChangeHeightTo height: CGFloat, isDragging: Bool) {
-        let maxHeight = self.view.frame.height / 2.0
+        let maxHeight = view.frame.height / 2.0
         let targetHeight = min(height, maxHeight)
         
         if (!isDragging)
@@ -103,10 +103,10 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
         }
         else
         {            
-            self.menuViewHeightConstraint?.constant = targetHeight
-            self.view.layoutIfNeeded()
+            menuViewHeightConstraint?.constant = targetHeight
+            view.layoutIfNeeded()
 
-            let numberOfItemsInTabBar = self.tabBar.items!.count
+            let numberOfItemsInTabBar = tabBar.items!.count
             
             let mappedItem = PullMenuUtils.mapValue(targetHeight,
                 minV: Config.menuViewHeight,
