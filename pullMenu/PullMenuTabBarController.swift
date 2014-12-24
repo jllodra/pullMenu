@@ -97,7 +97,7 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
                 initialSpringVelocity: Config.animationInitialSpringVelocity,
                 options: nil,
                 animations: {
-                    self.menuViewHeightConstraint?.constant = height
+                    self.menuViewHeightConstraint?.constant = targetHeight
                     self.view.layoutIfNeeded()
                 },
                 completion: {success in}
@@ -106,23 +106,23 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
         else
         {
             targetHeight = min(height, maxHeight)
-            let numberOfItemsInTabBar = self.tabBar.items!.count
-            
-            let mappedItem = self.mapValue(targetHeight,
-                minV: Config.menuViewHeight,
-                maxV: maxHeight,
-                outMinV: 0.0,
-                outMaxV: CGFloat(numberOfItemsInTabBar)
-            )
-            
-            let selectedItem = abs(max(0, min(numberOfItemsInTabBar - 1, Int(round(mappedItem)))))
-            
-            println(selectedItem)
             
             self.menuViewHeightConstraint?.constant = targetHeight
             self.view.layoutIfNeeded()
         }
 
+        let numberOfItemsInTabBar = self.tabBar.items!.count
+        
+        let mappedItem = self.mapValue(targetHeight,
+            minV: Config.menuViewHeight,
+            maxV: maxHeight,
+            outMinV: 0.0,
+            outMaxV: CGFloat(numberOfItemsInTabBar)
+        )
+        
+        let selectedItem = abs(max(0, min(numberOfItemsInTabBar - 1, Int(round(mappedItem)))))
+        
+        println(selectedItem)
     }
 
     private func mapValue(v: CGFloat, minV: CGFloat, maxV: CGFloat, outMinV: CGFloat, outMaxV: CGFloat) -> CGFloat {
