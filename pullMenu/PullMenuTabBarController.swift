@@ -122,6 +122,19 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
             self.menuViewHeightConstraint?.constant = targetHeight
             self.view.layoutIfNeeded()
         }
+
+        let numberOfItemsInTabBar = self.tabBar.items!.count
+        
+        let mappedItem = self.mapValue(height,
+            minV: Config.menuViewHeight,
+            maxV: maxHeight,
+            outMinV: 0.0,
+            outMaxV: CGFloat(numberOfItemsInTabBar)
+        )
+        
+        let selectedItem = abs(max(0, min(numberOfItemsInTabBar - 1, Int(round(mappedItem)))))
+        
+        println(selectedItem)
     }
 
     private func mapValue(v: CGFloat, minV: CGFloat, maxV: CGFloat, outMinV: CGFloat, outMaxV: CGFloat) -> CGFloat {
