@@ -79,8 +79,6 @@ class PullMenuViewController: UIViewController, PullMenuMenuViewDelegate {
         view.backgroundColor = UIColor.blackColor()
         menuView.backgroundColor = UIColor.greenColor()
         contentView.backgroundColor = UIColor.blueColor()
-        
-        println("view.subviews = %d", view.subviews)
     }
 }
 
