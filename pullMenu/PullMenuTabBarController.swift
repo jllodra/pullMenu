@@ -115,8 +115,10 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
                 outMaxV: CGFloat(numberOfItemsInTabBar - 1)
             )
             var targetIndex = max(0, Int(round(mappedItem)))
-            pullMenuTabBarProxyView.scrollToLabel(targetIndex)
-            selectedIndex = targetIndex
+            if(targetIndex != selectedIndex) {
+                pullMenuTabBarProxyView.scrollToLabel(targetIndex)
+                selectedIndex = targetIndex
+            }
         }
     }
 }
