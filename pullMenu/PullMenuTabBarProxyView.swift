@@ -71,7 +71,7 @@ class PullMenuTabBarProxyView: UIView {
             if let items = tabBar?.items as? Array<UITabBarItem> {
 
                 let dummyLabel = UILabel(forAutoLayout: ())
-                
+                dummyLabel.text = " "
                 dummyLabel.backgroundColor = UIColor.orangeColor()
                 
                 scrollView.addSubview(dummyLabel)
@@ -79,7 +79,7 @@ class PullMenuTabBarProxyView: UIView {
                 dummyLabel.autoMatchDimension(ALDimension.Width,
                     toDimension: ALDimension.Width,
                     ofView: scrollView,
-                    withMultiplier: 0.125
+                    withMultiplier: 0.33
                 )
                 
                 dummyLabel.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
@@ -97,14 +97,14 @@ class PullMenuTabBarProxyView: UIView {
                     label.autoMatchDimension(ALDimension.Width,
                         toDimension: ALDimension.Width,
                         ofView: scrollView,
-                        withMultiplier: 0.5
+                        withMultiplier: 0.33
                     )
                     
                     label.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
                 }
                 
                 let dummyLabel2 = UILabel(forAutoLayout: ())
-                
+                dummyLabel2.text = " "
                 dummyLabel2.backgroundColor = UIColor.orangeColor()
                 
                 scrollView.addSubview(dummyLabel2)
@@ -112,7 +112,7 @@ class PullMenuTabBarProxyView: UIView {
                 dummyLabel2.autoMatchDimension(ALDimension.Width,
                     toDimension: ALDimension.Width,
                     ofView: scrollView,
-                    withMultiplier: 0.125
+                    withMultiplier: 0.33
                 )
                 
                 dummyLabel2.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
@@ -121,7 +121,7 @@ class PullMenuTabBarProxyView: UIView {
 
                 views.autoDistributeViewsAlongAxis(ALAxis.Horizontal,
                     alignedTo: ALAttribute.Horizontal,
-                    withFixedSpacing: 10.0,
+                    withFixedSpacing: 0.0,
                     insetSpacing: true,
                     matchedSizes: false
                 )

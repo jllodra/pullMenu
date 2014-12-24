@@ -23,6 +23,25 @@
             </objects>
             <point key="canvasLocation" x="755" y="703"/>
         </scene>
+        <!--About me-->
+        <scene sceneID="J1W-iM-Hi5">
+            <objects>
+                <viewController id="AlY-Rf-inp" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0PG-bz-Tk4"/>
+                        <viewControllerLayoutGuide type="bottom" id="9Pz-fS-vNf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZnO-hy-ji1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="About me" id="lw7-cc-fnU"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KPp-7F-c1a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="336" y="1158"/>
+        </scene>
         <!--Item 1-->
         <scene sceneID="brs-RK-zaL">
             <objects>
@@ -55,6 +74,7 @@
                     <connections>
                         <segue destination="e28-Pc-mbF" kind="relationship" relationship="viewControllers" id="F7W-nb-ptI"/>
                         <segue destination="wnP-au-gdM" kind="relationship" relationship="viewControllers" id="Hcr-OS-LWc"/>
+                        <segue destination="AlY-Rf-inp" kind="relationship" relationship="viewControllers" id="SaD-4t-5Yo"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bBz-4j-fSd" userLabel="First Responder" sceneMemberID="firstResponder"/>
