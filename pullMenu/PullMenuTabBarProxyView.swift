@@ -56,7 +56,14 @@ class PullMenuTabBarProxyView: UIView {
     
     func scrollToLabel(index: Int) {
         let labelWidth = labelViews[0].frame.width
-        scrollView.setContentOffset(CGPointMake(CGFloat(index)*labelWidth, 0.0), animated: true)
+        UIView.animateWithDuration(0.15,
+            delay: 0.0,
+            options: nil,
+            animations: {
+                self.scrollView.contentOffset = CGPointMake(CGFloat(index)*labelWidth, 0.0)
+            },
+            completion: nil
+            )
     }
     
     override func updateConstraints() {
