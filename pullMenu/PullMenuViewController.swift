@@ -88,17 +88,22 @@ class PullMenuViewController: UIViewController, PullMenuMenuViewDelegate {
 
 extension PullMenuViewController : PullMenuMenuViewDelegate {
 
-    func pullMenuMenuView(pullMenuMenuView: PullMenuMenuView, wantsToChangeHeightTo height: CGFloat) {
-        UIView.animateWithDuration(Config.animationTime,
-            delay: Config.animationDelay,
-            usingSpringWithDamping: Config.animationSpringWithDamping,
-            initialSpringVelocity: Config.animationInitialSpringVelocity,
-            options: nil,
-            animations: {
-                self.menuViewHeightConstraint?.constant = height
-                self.view.layoutIfNeeded()
-            },
-            completion: {success in}
-        )
+    func pullMenuMenuView(pullMenuMenuView: PullMenuMenuView, wantsToChangeHeightTo height: CGFloat, withAnimation: Bool) {
+        if(withAnimation) {
+            UIView.animateWithDuration(Config.animationTime,
+                delay: Config.animationDelay,
+                usingSpringWithDamping: Config.animationSpringWithDamping,
+                initialSpringVelocity: Config.animationInitialSpringVelocity,
+                options: nil,
+                animations: {
+                    self.menuViewHeightConstraint?.constant = height
+                    self.view.layoutIfNeeded()
+                },
+                completion: {success in}
+            )
+        } else {
+            self.menuViewHeightConstraint?.constant = height
+            self.view.layoutIfNeeded()
+        }
     }
 }

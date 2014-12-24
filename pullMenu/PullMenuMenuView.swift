@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PullMenuMenuViewDelegate {
-    func pullMenuMenuView(pullMenuMenuView: PullMenuMenuView, wantsToChangeHeightTo height: CGFloat)
+    func pullMenuMenuView(pullMenuMenuView: PullMenuMenuView, wantsToChangeHeightTo height: CGFloat, withAnimation: Bool)
 }
 
 class PullMenuMenuView: UIView {
@@ -32,10 +32,10 @@ class PullMenuMenuView: UIView {
             case UIGestureRecognizerState.Changed:
                 var translationPoint = recognizer.translationInView(self)
 
-                delegate?.pullMenuMenuView(self, wantsToChangeHeightTo: initialHeight + translationPoint.y)
+                delegate?.pullMenuMenuView(self, wantsToChangeHeightTo: initialHeight + translationPoint.y, withAnimation: false)
                 break
             case UIGestureRecognizerState.Ended:
-                self.delegate?.pullMenuMenuView(self, wantsToChangeHeightTo: self.initialHeight)
+                self.delegate?.pullMenuMenuView(self, wantsToChangeHeightTo: self.initialHeight, withAnimation: true)
                 break
             default:
                 break
