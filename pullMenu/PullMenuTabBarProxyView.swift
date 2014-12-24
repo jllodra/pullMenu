@@ -69,6 +69,21 @@ class PullMenuTabBarProxyView: UIView {
             }
 
             if let items = tabBar?.items as? Array<UITabBarItem> {
+
+                let dummyLabel = UILabel(forAutoLayout: ())
+                
+                dummyLabel.backgroundColor = UIColor.orangeColor()
+                
+                scrollView.addSubview(dummyLabel)
+                
+                dummyLabel.autoMatchDimension(ALDimension.Width,
+                    toDimension: ALDimension.Width,
+                    ofView: scrollView,
+                    withMultiplier: 0.125
+                )
+                
+                dummyLabel.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
+                
                 for item in items
                 {
                     let label = UILabel(forAutoLayout: ())
@@ -81,13 +96,27 @@ class PullMenuTabBarProxyView: UIView {
 
                     label.autoMatchDimension(ALDimension.Width,
                         toDimension: ALDimension.Width,
-                        ofView: self,
+                        ofView: scrollView,
                         withMultiplier: 0.5
                     )
-
+                    
                     label.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
                 }
                 
+                let dummyLabel2 = UILabel(forAutoLayout: ())
+                
+                dummyLabel2.backgroundColor = UIColor.orangeColor()
+                
+                scrollView.addSubview(dummyLabel2)
+                
+                dummyLabel2.autoMatchDimension(ALDimension.Width,
+                    toDimension: ALDimension.Width,
+                    ofView: scrollView,
+                    withMultiplier: 0.125
+                )
+                
+                dummyLabel2.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
+
                 let views = scrollView.subviews as NSArray
 
                 views.autoDistributeViewsAlongAxis(ALAxis.Horizontal,
