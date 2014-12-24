@@ -86,32 +86,34 @@ class PullMenuTabBarController: UITabBarController, PullMenuTabBarProxyViewDeleg
 extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
 
     func pullMenuTabBarProxyView(pullMenuTabBarProxyView: PullMenuTabBarProxyView, wantsToChangeHeightTo height: CGFloat) {
+        let maxHeight = self.view.frame.height / 2.0
+        
+        if (height > maxHeight)
+        {
+            return
+        }
+
         UIView.animateWithDuration(Config.animationTime,
             delay: Config.animationDelay,
             usingSpringWithDamping: Config.animationSpringWithDamping,
             initialSpringVelocity: Config.animationInitialSpringVelocity,
             options: nil,
             animations: {
-                let maxHeight = self.view.frame.height / 2.0
+                let numberOfItemsInTabBar = self.tabBar.items!.count
                 
-                if (height <= maxHeight)
-                {
-                    let numberOfItemsInTabBar = self.tabBar.items!.count
-                    
-                    let mappedItem = self.mapValue(height,
-                        minV: Config.menuViewHeight,
-                        maxV: maxHeight,
-                        outMinV: 0.0,
-                        outMaxV: CGFloat(numberOfItemsInTabBar)
-                    )
-                    
-                    let selectedItem = abs(max(0, min(numberOfItemsInTabBar - 1, Int(round(mappedItem)))))
-                    
-                    println(selectedItem)
+                let mappedItem = self.mapValue(height,
+                    minV: Config.menuViewHeight,
+                    maxV: maxHeight,
+                    outMinV: 0.0,
+                    outMaxV: CGFloat(numberOfItemsInTabBar)
+                )
+                
+                let selectedItem = abs(max(0, min(numberOfItemsInTabBar - 1, Int(round(mappedItem)))))
+                
+                println(selectedItem)
 
-                    self.menuViewHeightConstraint?.constant = height
-                    self.view.layoutIfNeeded()
-                }
+                self.menuViewHeightConstraint?.constant = height
+                self.view.layoutIfNeeded()
             },
             completion: {success in}
         )
