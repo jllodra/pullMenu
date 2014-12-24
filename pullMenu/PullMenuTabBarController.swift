@@ -93,13 +93,19 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
             options: nil,
             animations: {
                 let maxHeight = self.view.frame.height / 2.0
-                let originalHeight = Config.menuViewHeight
                 
                 if (height <= maxHeight)
                 {
-                    let offsetY = height - originalHeight
-                    let maxOffsetY = maxHeight - originalHeight
-                    let selectedItem = self.calculateTargetTabBarItemAtPosition(offsetY, height: maxOffsetY)
+                    let numberOfItemsInTabBar = self.tabBar.items!.count
+                    
+                    let mappedItem = self.mapValue(height,
+                        minV: Config.menuViewHeight,
+                        maxV: maxHeight,
+                        outMinV: 0.0,
+                        outMaxV: CGFloat(numberOfItemsInTabBar)
+                    )
+                    
+                    let selectedItem = abs(max(0, min(numberOfItemsInTabBar - 1, Int(round(mappedItem)))))
                     
                     println(selectedItem)
 
@@ -110,23 +116,7 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
             completion: {success in}
         )
     }
-    
-    private func calculateTargetTabBarItemAtPosition(position: CGFloat, height: CGFloat) -> Int
-    {
-        let numberOfItemsInTabBar = self.tabBar.items!.count
-        
-        let mappedItem = self.mapValue(position,
-            minV: 0.0,
-            maxV: height,
-            outMinV: 0.0,
-            outMaxV: CGFloat(numberOfItemsInTabBar)
-        )
-        
-        let selectedItem = abs(max(0, min(numberOfItemsInTabBar - 1, Int(round(mappedItem)))))
-        
-        return selectedItem
-    }
-    
+   
     private func mapValue(v: CGFloat, minV: CGFloat, maxV: CGFloat, outMinV: CGFloat, outMaxV: CGFloat) -> CGFloat {
         return (v - minV) * (outMaxV - outMinV) / (maxV - minV) + outMinV
     }
