@@ -23,7 +23,6 @@ class PullMenuMenuView: UIView {
     }()
     
     private var initialHeight: CGFloat = 0.0
-    private var animationTime: NSTimeInterval = 0.5
     
     internal func handlePanning(recognizer: UIPanGestureRecognizer) {
         switch recognizer.state {
@@ -36,10 +35,7 @@ class PullMenuMenuView: UIView {
                 delegate?.pullMenuMenuView(self, wantsToChangeHeightTo: initialHeight + translationPoint.y)
                 break
             case UIGestureRecognizerState.Ended:
-                UIView.animateWithDuration(NSTimeInterval(animationTime), animations: {
-                    self.frame.size.height = self.initialHeight
-                    self.delegate?.pullMenuMenuView(self, wantsToChangeHeightTo: self.initialHeight)
-                })
+                self.delegate?.pullMenuMenuView(self, wantsToChangeHeightTo: self.initialHeight)
                 break
             default:
                 break

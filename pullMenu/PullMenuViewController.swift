@@ -10,13 +10,17 @@ import UIKit
 
 class PullMenuViewController: UIViewController, PullMenuMenuViewDelegate {
 
-    struct DefaultDimensions {
+    struct Config {
         static let menuViewHeight: CGFloat = 80.0
+        static let animationTime: NSTimeInterval = 0.5
+        static let animationDelay: NSTimeInterval = 0.0
+        static let animationSpringWithDamping: CGFloat = 0.3
+        static let animationInitialSpringVelocity: CGFloat = 0.5
     }
     
     var didSetupConstraints: Bool = false
     internal var menuViewHeightConstraint: NSLayoutConstraint?
-
+    
     // MARK: Accessors
     
     private lazy var menuView: PullMenuMenuView = {
@@ -43,7 +47,7 @@ class PullMenuViewController: UIViewController, PullMenuMenuViewDelegate {
             
             menuViewHeightConstraint = self.menuView.autoSetDimension(
                 ALDimension.Height,
-                toSize: DefaultDimensions.menuViewHeight
+                toSize: Config.menuViewHeight
             )
             
             contentView.autoPinEdge(
@@ -85,7 +89,16 @@ class PullMenuViewController: UIViewController, PullMenuMenuViewDelegate {
 extension PullMenuViewController : PullMenuMenuViewDelegate {
 
     func pullMenuMenuView(pullMenuMenuView: PullMenuMenuView, wantsToChangeHeightTo height: CGFloat) {
-        menuViewHeightConstraint?.constant = height
-        view.layoutIfNeeded()
+        UIView.animateWithDuration(Config.animationTime,
+            delay: Config.animationDelay,
+            usingSpringWithDamping: Config.animationSpringWithDamping,
+            initialSpringVelocity: Config.animationInitialSpringVelocity,
+            options: nil,
+            animations: {
+                self.menuViewHeightConstraint?.constant = height
+                self.view.layoutIfNeeded()
+            },
+            completion: {success in}
+        )
     }
 }
