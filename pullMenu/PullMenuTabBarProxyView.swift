@@ -70,9 +70,9 @@ class PullMenuTabBarProxyView: UIView {
                 var itemsToAdd: Array<AnyObject> = items
                 
                 itemsToAdd.insert(NSNull(), atIndex: 0)
-                itemsToAdd.insert(NSNull(), atIndex: itemsToAdd.count)
+                itemsToAdd.append(NSNull())
                 
-                var labelViews: Array<UIView> = Array()
+                var labelViews: Array<UILabel> = Array()
                
                 for item in itemsToAdd
                 {
