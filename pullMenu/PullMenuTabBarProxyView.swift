@@ -79,8 +79,6 @@ class PullMenuTabBarProxyView: UIView {
                     
                     scrollView.addSubview(label)
 
-                    label.autoPinEdgeToSuperviewEdge(ALEdge.Top, withInset: 30)
-                    label.autoPinEdgeToSuperviewEdge(ALEdge.Bottom, withInset: 30)
                     label.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
                 }
                 
