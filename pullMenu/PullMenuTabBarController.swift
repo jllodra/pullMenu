@@ -40,15 +40,13 @@ class PullMenuTabBarController: UITabBarController, PullMenuTabBarProxyViewDeleg
             tabBarProxyView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
             tabBarProxyView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
             
-            menuViewHeightConstraint = tabBarProxyView.autoSetDimension(
-                ALDimension.Height,
+            menuViewHeightConstraint = tabBarProxyView.autoSetDimension(ALDimension.Height,
                 toSize: Config.menuViewHeight
             )
             
             let transitionView = view.subviews[0] as UIView
 
-            transitionView.autoPinEdge(
-                ALEdge.Top,
+            transitionView.autoPinEdge(ALEdge.Top,
                 toEdge: ALEdge.Bottom,
                 ofView: tabBarProxyView
             )
@@ -100,7 +98,7 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
                     self.menuViewHeightConstraint?.constant = targetHeight
                     self.view.layoutIfNeeded()
                 },
-                completion: {success in}
+                completion: nil
             )
         }
         else
