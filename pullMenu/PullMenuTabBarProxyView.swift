@@ -59,8 +59,6 @@ class PullMenuTabBarProxyView: UIView {
             if !contains(subviews as Array<UIView>, scrollView)
             {
                 addSubview(scrollView)
-
-                scrollView.backgroundColor = UIColor.purpleColor()
                 
                 scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Top)
                 scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Bottom)
@@ -69,29 +67,25 @@ class PullMenuTabBarProxyView: UIView {
             }
 
             if let items = tabBar?.items as? Array<UITabBarItem> {
+                var itemsToAdd: Array<AnyObject> = items
+                
+                itemsToAdd.insert(NSNull(), atIndex: 0)
+                itemsToAdd.insert(NSNull(), atIndex: itemsToAdd.count)
+                
                 var labelViews: Array<UIView> = Array()
-
-                let leftFillerView = UIView(forAutoLayout: ())
-                
-                scrollView.addSubview(leftFillerView)
-                
-                leftFillerView.autoMatchDimension(ALDimension.Width,
-                    toDimension: ALDimension.Width,
-                    ofView: scrollView,
-                    withMultiplier: 0.33
-                )
-                
-                leftFillerView.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
-                
-                labelViews.append(leftFillerView)
                
-                for item in items
+                for item in itemsToAdd
                 {
                     let label = UILabel(forAutoLayout: ())
                     
-                    label.text = item.title
-                    label.textAlignment = NSTextAlignment.Center
-                    label.backgroundColor = UIColor.greenColor()
+                    // Treat non-UITabBarItem items as fillers
+
+                    if (item.isKindOfClass(UITabBarItem))
+                    {
+                        label.text = item.title
+                        label.textAlignment = NSTextAlignment.Center
+                        label.backgroundColor = UIColor.greenColor()
+                    }
                     
                     scrollView.addSubview(label)
 
@@ -105,21 +99,6 @@ class PullMenuTabBarProxyView: UIView {
 
                     labelViews.append(label)
                 }
-                
-                let rightFillerView = UIView(forAutoLayout: ())
-                rightFillerView.backgroundColor = UIColor.orangeColor()
-                
-                scrollView.addSubview(rightFillerView)
-                
-                rightFillerView.autoMatchDimension(ALDimension.Width,
-                    toDimension: ALDimension.Width,
-                    ofView: scrollView,
-                    withMultiplier: 0.33
-                )
-                
-                rightFillerView.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
-
-                labelViews.append(rightFillerView)
                 
                 let views = labelViews as NSArray
 
