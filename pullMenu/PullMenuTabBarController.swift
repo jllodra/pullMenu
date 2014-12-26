@@ -20,6 +20,7 @@ class PullMenuTabBarController: UITabBarController, PullMenuTabBarProxyViewDeleg
     
     var didSetupConstraints: Bool = false
     internal var menuViewHeightConstraint: NSLayoutConstraint?
+    private var targetIndex:Int = 0
     
     // MARK: Accessors
     
@@ -27,8 +28,12 @@ class PullMenuTabBarController: UITabBarController, PullMenuTabBarProxyViewDeleg
         let obj = PullMenuTabBarProxyView(forAutoLayout: ())
         
         obj.delegate = self
-        obj.tabBar = self.tabBar
         
+        for element in self.tabBar.items as [UITabBarItem]
+        {
+            obj.items.append(element.title!)
+        }
+
         return obj
     }()    
 
@@ -63,7 +68,6 @@ class PullMenuTabBarController: UITabBarController, PullMenuTabBarProxyViewDeleg
     
     override func viewDidLoad() {
         tabBar.hidden = true
-
         addControls()
         debug()
     }
@@ -87,8 +91,9 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
         let maxHeight = view.frame.height / 2.0
         let targetHeight = min(height, maxHeight)
         
-        if (!isDragging)
-        {
+        if (!isDragging) {
+            selectedIndex = targetIndex
+
             UIView.animateWithDuration(Config.animationTime,
                 delay: Config.animationDelay,
                 usingSpringWithDamping: Config.animationSpringWithDamping,
@@ -97,28 +102,28 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
                 animations: {
                     self.menuViewHeightConstraint?.constant = targetHeight
                     self.view.layoutIfNeeded()
+                    pullMenuTabBarProxyView.rebuildItems()
                 },
                 completion: nil
             )
-        }
-        else
-        {            
-            menuViewHeightConstraint?.constant = targetHeight
-            view.layoutIfNeeded()
-
-            let numberOfItemsInTabBar = tabBar.items!.count
+            
+        } else {
+            let tabBarItems = pullMenuTabBarProxyView.items
             
             let mappedItem = PullMenuUtils.mapValue(targetHeight,
                 minV: Config.menuViewHeight,
                 maxV: maxHeight,
                 outMinV: 0.0,
-                outMaxV: CGFloat(numberOfItemsInTabBar - 1)
+                outMaxV: CGFloat(tabBarItems.count - 1)
             )
-            var targetIndex = max(0, Int(round(mappedItem)))
-            if(targetIndex != selectedIndex) {
-                pullMenuTabBarProxyView.scrollToLabel(targetIndex)
-                selectedIndex = targetIndex
-            }
+
+            targetIndex = max(0, Int(round(mappedItem)))
+            menuViewHeightConstraint?.constant = targetHeight
+            view.layoutIfNeeded()
+            
+            let selectedTitle = tabBarItems[targetIndex]
+            
+            pullMenuTabBarProxyView.scrollToTitle(selectedTitle)
         }
     }
 }

@@ -15,15 +15,16 @@ protocol PullMenuTabBarProxyViewDelegate {
 class PullMenuTabBarProxyView: UIView {
 
     var delegate: PullMenuTabBarProxyViewDelegate?
-    var tabBar: UITabBar?
-
+    var items: [String] = []
+    
     private var didSetupConstraints: Bool = false
-    private var labelViews: Array<UIView> = Array()
+    private var labelViews: [UIView] = []
+    private var selectedTitle: String?
     
     private lazy var scrollView: UIScrollView = {
         let obj = UIScrollView(forAutoLayout: ())
         
-        //obj.scrollEnabled = false
+        obj.scrollEnabled = false
         
         return obj
     }()
@@ -54,23 +55,60 @@ class PullMenuTabBarProxyView: UIView {
         }
     }
     
-    func scrollToLabel(index: Int) {
-        let labelWidth = labelViews[0].frame.width
-        UIView.animateWithDuration(0.15,
-            delay: 0.0,
-            options: nil,
-            animations: {
-                self.scrollView.contentOffset = CGPointMake(CGFloat(index)*labelWidth, 0.0)
-            },
-            completion: nil
-            )
+    func scrollToTitle(title: String) {
+        if selectedTitle != title {
+            if let index = find(items, title)
+            {
+                selectedTitle = title
+                
+                let labelWidth = labelViews[0].frame.width
+                UIView.animateWithDuration(0.15,
+                    delay: 0.0,
+                    options: nil,
+                    animations: {
+                        self.scrollView.contentOffset = CGPointMake(CGFloat(index) * labelWidth, 0.0)
+                    },
+                    completion: nil
+                )
+            }
+        }
+    }
+    
+    func rebuildItems()
+    {
+        var selectedIndex = find(items, selectedTitle!) ?? 0
+        var reorderedItems: [String] = []
+        
+        if (selectedIndex == 0)
+        {
+            // No reorder is needed
+            
+            reorderedItems = items
+        }
+        else if (selectedIndex == items.count - 1)
+        {
+            reorderedItems = [items.last!]
+            reorderedItems += items[0...items.count - 2]
+        }
+        else
+        {
+            reorderedItems = []
+            reorderedItems += items[selectedIndex...items.count - selectedIndex]
+            reorderedItems += items[0...selectedIndex - 1]
+        }
+        
+        items = reorderedItems
+        
+        self.scrollView.contentOffset = CGPointMake(0.0, 0.0)
+        
+        selectedTitle = items[0]
+        didSetupConstraints = false
+        setNeedsUpdateConstraints()
     }
     
     override func updateConstraints() {
-        if !didSetupConstraints
-        {
-            if !contains(subviews as Array<UIView>, scrollView)
-            {
+        if !didSetupConstraints {
+            if !contains(subviews as [UIView], scrollView) {
                 addSubview(scrollView)
                 
                 scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Top)
@@ -79,47 +117,56 @@ class PullMenuTabBarProxyView: UIView {
                 scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
             }
 
-            if let items = tabBar?.items as? Array<UITabBarItem> {
-                var itemsToAdd: Array<AnyObject> = items
+            var titlesToAdd: [String?] = []
+            
+            titlesToAdd.append(nil)
+
+            for item in items {
+                titlesToAdd.append(item)
+            }
+            
+            titlesToAdd.append(nil)
+            
+            // Remove existing labels
+            
+            for view in labelViews {
+                view.removeFromSuperview()
+            }
+            
+            labelViews = []
+            
+            // Create and add labels
+        
+            for title in titlesToAdd {
+                let label = UILabel(forAutoLayout: ())
                 
-                itemsToAdd.insert(NSNull(), atIndex: 0)
-                itemsToAdd.append(NSNull())
-                               
-                for item in itemsToAdd
-                {
-                    let label = UILabel(forAutoLayout: ())
-                    
-                    // Treat non-UITabBarItem items as fillers
+                // Treat nil titles as fillers
 
-                    if item.isKindOfClass(UITabBarItem)
-                    {
-                        label.text = item.title
-                        label.textAlignment = NSTextAlignment.Center
-                        label.backgroundColor = UIColor.greenColor()
-                    }
-                    
-                    scrollView.addSubview(label)
-
-                    label.autoMatchDimension(ALDimension.Width,
-                        toDimension: ALDimension.Width,
-                        ofView: scrollView,
-                        withMultiplier: 0.33
-                    )
-                    
-                    label.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
-
-                    labelViews.append(label)
+                if title != nil {
+                    label.text = title!
+                    label.textAlignment = NSTextAlignment.Center
+                    label.backgroundColor = UIColor.greenColor()
                 }
                 
-                let views = labelViews as NSArray
+                scrollView.addSubview(label)
 
-                views.autoDistributeViewsAlongAxis(ALAxis.Horizontal,
-                    alignedTo: ALAttribute.Horizontal,
-                    withFixedSpacing: 0.0,
-                    insetSpacing: true,
-                    matchedSizes: false
+                label.autoMatchDimension(ALDimension.Width,
+                    toDimension: ALDimension.Width,
+                    ofView: scrollView,
+                    withMultiplier: 0.33
                 )
+                
+                label.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
+
+                labelViews.append(label)
             }
+            
+            (labelViews as NSArray).autoDistributeViewsAlongAxis(ALAxis.Horizontal,
+                alignedTo: ALAttribute.Horizontal,
+                withFixedSpacing: 0.0,
+                insetSpacing: true,
+                matchedSizes: false
+            )
             
             didSetupConstraints = true
         }
