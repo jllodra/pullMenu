@@ -92,6 +92,8 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
         let targetHeight = min(height, maxHeight)
         
         if (!isDragging) {
+            let previousSelectedIndex = targetIndex
+            
             let selectedTitle = pullMenuTabBarProxyView.items[targetIndex]
             
             for (index, element) in enumerate(tabBar.items as Array!)
@@ -111,7 +113,7 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
                 options: nil,
                 animations: {
                     self.menuViewHeightConstraint?.constant = targetHeight
-                    pullMenuTabBarProxyView.dimLabels(self.selectedIndex)
+                    pullMenuTabBarProxyView.dimLabels(previousSelectedIndex)
                     self.view.layoutIfNeeded()
                 },
                 completion: {
