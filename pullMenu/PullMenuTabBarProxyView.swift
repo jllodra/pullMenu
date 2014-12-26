@@ -61,12 +61,12 @@ class PullMenuTabBarProxyView: UIView {
             {
                 selectedTitle = title
                 
-                let labelWidth = labelViews[0].frame.width
                 UIView.animateWithDuration(0.15,
                     delay: 0.0,
                     options: nil,
                     animations: {
-                        self.scrollView.contentOffset = CGPointMake(CGFloat(index) * labelWidth, 0.0)
+                        let xOffset = CGFloat(self.labelViews[index].frame.origin.x)
+                        self.scrollView.contentOffset = CGPointMake(xOffset, 0.0)
                     },
                     completion: nil
                 )
