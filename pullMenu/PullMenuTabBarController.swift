@@ -33,7 +33,7 @@ class PullMenuTabBarController: UITabBarController, PullMenuTabBarProxyViewDeleg
         {
             obj.items.append(element.title!)
         }
-
+        
         return obj
     }()    
 
@@ -92,19 +92,7 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
         let targetHeight = min(height, maxHeight)
         
         if (!isDragging) {
-            let previousSelectedIndex = targetIndex
-            
-            let selectedTitle = pullMenuTabBarProxyView.items[targetIndex]
-            
-            for (index, element) in enumerate(tabBar.items as Array!)
-            {
-                if (element.title == selectedTitle)
-                {
-                    selectedIndex = index
-                    
-                    break
-                }
-            }
+            selectedIndex = targetIndex
 
             UIView.animateWithDuration(Config.animationTime,
                 delay: Config.animationDelay,
@@ -112,8 +100,8 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
                 initialSpringVelocity: Config.animationInitialSpringVelocity,
                 options: nil,
                 animations: {
+                    pullMenuTabBarProxyView.dimLabels()
                     self.menuViewHeightConstraint?.constant = targetHeight
-                    pullMenuTabBarProxyView.dimLabels(previousSelectedIndex)
                     self.view.layoutIfNeeded()
                 },
                 completion: {
@@ -132,16 +120,12 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
                 outMaxV: CGFloat(tabBarItems.count - 1)
             )
             
-            
             targetIndex = max(0, Int(round(mappedItem)))
             menuViewHeightConstraint?.constant = targetHeight
             view.layoutIfNeeded()
             
-            pullMenuTabBarProxyView.updateLabelItemsAlpha(mappedItem, currentItem: targetIndex)
-
-            let selectedTitle = tabBarItems[targetIndex]
-            
-            pullMenuTabBarProxyView.scrollToTitle(selectedTitle)
+            pullMenuTabBarProxyView.updateLabelItemsAlpha(mappedItem)
+            pullMenuTabBarProxyView.scrollToIndex(targetIndex)
         }
     }
 }

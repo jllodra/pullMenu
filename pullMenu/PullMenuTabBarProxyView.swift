@@ -18,8 +18,8 @@ class PullMenuTabBarProxyView: UIView {
     var items: [String] = []
     
     private var didSetupConstraints: Bool = false
-    private var labelViews: [UIView] = []
-    private var selectedTitle: String?
+    private var labelViews: [UILabel] = []
+    private var selectedIndex: Int = 0
     
     private lazy var scrollView: UIScrollView = {
         let obj = UIScrollView(forAutoLayout: ())
@@ -54,85 +54,66 @@ class PullMenuTabBarProxyView: UIView {
         }
     }
     
-    func scrollToTitle(title: String) {
-        if selectedTitle != title {
-            if let index = find(items, title)
-            {
-                selectedTitle = title
-                
-                UIView.animateWithDuration(0.15,
-                    delay: 0.0,
-                    options: nil,
-                    animations: {
-                        let xOffset = CGFloat(self.labelViews[index].frame.origin.x)
-                        self.scrollView.contentOffset = CGPointMake(xOffset, 0.0)
-                    },
-                    completion: nil
-                )
-            }
+    func scrollToIndex(index: Int) {
+        if selectedIndex != index {
+            selectedIndex = index
+            
+            UIView.animateWithDuration(0.15,
+                delay: 0.0,
+                options: nil,
+                animations: {
+                    let xOffset = CGFloat(self.labelViews[index].frame.origin.x)
+                    self.scrollView.contentOffset = CGPointMake(xOffset, 0.0)
+                },
+                completion: nil
+            )
         }
     }
     
     func rebuildItems()
     {
-        var selectedIndex = find(items, selectedTitle!) ?? 0
-        var reorderedItems: [String] = []
-        
-        if (selectedIndex == 0)
-        {
-            // No reorder is needed
-            
-            reorderedItems = items
-        }
-        else if (selectedIndex == items.count - 1)
-        {
-            reorderedItems = [items.last!]
-            reorderedItems += items[0...items.count - 2]
-        }
-        else
-        {
-            reorderedItems = []
-            reorderedItems += items[selectedIndex...items.count - selectedIndex]
-            reorderedItems += items[0...selectedIndex - 1]
-        }
-        
-        items = reorderedItems
-        
-        self.scrollView.contentOffset = CGPointMake(0.0, 0.0)
-        
-        selectedTitle = items[0]
-        didSetupConstraints = false
-        setNeedsUpdateConstraints()
-    }
-    
-    func updateLabelItemsAlpha(distanceDone: CGFloat, currentItem: Int) {
-        let numLabels: Int = labelViews.count - 2 // fillers
-        
-        for (index, label) in enumerate(self.labelViews) {
-            if(index > 0 && index < labelViews.count - 1) {
-                if(index != currentItem+1 && label.alpha < 0.66) {
-                    label.alpha = distanceDone
-                }
-                if(label.alpha > 0.66) {
-                    label.alpha = 0.66
-                }
-            }
-        }
-        
-        self.labelViews[currentItem + 1].alpha = 1.0
+        if (selectedIndex > 0) {
+            let labels = actualLabelViews()
 
+            if let selectedLabelIndex = find(items, labels[selectedIndex].text!) {
+                var index = selectedLabelIndex
+                
+                for element in labels {
+                    element.text = items[index]
+                    index++
+                    index %= items.count
+                }
+            }
+        }
+    
+        selectedIndex = 0
+        scrollView.contentOffset = CGPointMake(0.0, 0.0)
+        
+        updateLabelItemsAlpha(0.0)
     }
     
-    func dimLabels(currentItem: Int) {
-        for (index, label) in enumerate(self.labelViews) {
-            if(index > 0 && index < labelViews.count - 1) {
-                if(index != currentItem+1) {
-                    label.alpha = 0.0
-                }
+    func updateLabelItemsAlpha(distanceDone: CGFloat) {
+        let labels = actualLabelViews()
+
+        for (index, labelView) in enumerate(labels) {
+            labelView.alpha = index == selectedIndex ? 1.0 : min(distanceDone, 0.66)
+        }
+    }
+    
+    func dimLabels() {
+        let actualLabelViews = filter(labelViews) { $0.text != nil }
+
+        for (index, labelView) in enumerate(actualLabelViews) {
+            if index != selectedIndex {
+                labelView.alpha = 0.0
             }
         }
     }
     
+    private func actualLabelViews() -> [UILabel] {
+        return filter(labelViews) { $0.text != nil }
+    }
+
     override func updateConstraints() {
         if !didSetupConstraints {
             if !contains(subviews as [UIView], scrollView) {
@@ -172,7 +153,6 @@ class PullMenuTabBarProxyView: UIView {
                 if title != nil {
                     label.text = title!
                     label.textColor = UIColor.whiteColor()
-                    label.alpha = (index == 1) ? 1.0 : 0.0
                     label.textAlignment = NSTextAlignment.Center
                     //label.backgroundColor = UIColor.greenColor()
                 }
@@ -190,6 +170,8 @@ class PullMenuTabBarProxyView: UIView {
                 labelViews.append(label)
             }
             
+            dimLabels()
+            
             (labelViews as NSArray).autoDistributeViewsAlongAxis(ALAxis.Horizontal,
                 alignedTo: ALAttribute.Horizontal,
                 withFixedSpacing: 0.0,
@@ -202,7 +184,7 @@ class PullMenuTabBarProxyView: UIView {
 
         super.updateConstraints()
     }
-    
+
     override init() {
         super.init()
         NSLog("PullMenuTabBarProxyView init")
