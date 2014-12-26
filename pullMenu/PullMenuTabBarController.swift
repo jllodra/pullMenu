@@ -102,9 +102,11 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
                 animations: {
                     self.menuViewHeightConstraint?.constant = targetHeight
                     self.view.layoutIfNeeded()
-                    pullMenuTabBarProxyView.rebuildItems()
                 },
-                completion: nil
+                completion: {
+                    done in
+                    pullMenuTabBarProxyView.rebuildItems()
+                }
             )
             
         } else {

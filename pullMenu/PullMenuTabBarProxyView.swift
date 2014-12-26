@@ -145,7 +145,7 @@ class PullMenuTabBarProxyView: UIView {
                 if title != nil {
                     label.text = title!
                     label.textAlignment = NSTextAlignment.Center
-                    label.backgroundColor = UIColor.greenColor()
+                    //label.backgroundColor = UIColor.greenColor()
                 }
                 
                 scrollView.addSubview(label)
