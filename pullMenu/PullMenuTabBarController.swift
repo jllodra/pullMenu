@@ -101,6 +101,7 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
                 options: nil,
                 animations: {
                     self.menuViewHeightConstraint?.constant = targetHeight
+                    pullMenuTabBarProxyView.dimLabels(self.selectedIndex)
                     self.view.layoutIfNeeded()
                 },
                 completion: {
@@ -118,11 +119,14 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
                 outMinV: 0.0,
                 outMaxV: CGFloat(tabBarItems.count - 1)
             )
-
+            
+            
             targetIndex = max(0, Int(round(mappedItem)))
             menuViewHeightConstraint?.constant = targetHeight
             view.layoutIfNeeded()
             
+            pullMenuTabBarProxyView.updateLabelItemsAlpha(mappedItem, currentItem: targetIndex)
+
             let selectedTitle = tabBarItems[targetIndex]
             
             pullMenuTabBarProxyView.scrollToTitle(selectedTitle)

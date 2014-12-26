@@ -44,7 +44,6 @@ class PullMenuTabBarProxyView: UIView {
                 break
             case UIGestureRecognizerState.Changed:
                 var translationPoint = recognizer.translationInView(self)
-
                 delegate?.pullMenuTabBarProxyView(self, wantsToChangeHeightTo: initialHeight + translationPoint.y, isDragging: true)
                 break
             case UIGestureRecognizerState.Ended:
@@ -106,6 +105,34 @@ class PullMenuTabBarProxyView: UIView {
         setNeedsUpdateConstraints()
     }
     
+    func updateLabelItemsAlpha(distanceDone: CGFloat, currentItem: Int) {
+        let numLabels: Int = labelViews.count - 2 // fillers
+        
+        for (index, label) in enumerate(self.labelViews) {
+            if(index > 0 && index < labelViews.count - 1) {
+                if(index != currentItem+1 && label.alpha < 0.66) {
+                    label.alpha = distanceDone
+                }
+                if(label.alpha > 0.66) {
+                    label.alpha = 0.66
+                }
+            }
+        }
+        
+        self.labelViews[currentItem + 1].alpha = 1.0
+
+    }
+    
+    func dimLabels(currentItem: Int) {
+        for (index, label) in enumerate(self.labelViews) {
+            if(index > 0 && index < labelViews.count - 1) {
+                if(index != currentItem+1) {
+                    label.alpha = 0.0
+                }
+            }
+        }
+    }
+    
     override func updateConstraints() {
         if !didSetupConstraints {
             if !contains(subviews as [UIView], scrollView) {
@@ -137,13 +164,15 @@ class PullMenuTabBarProxyView: UIView {
             
             // Create and add labels
         
-            for title in titlesToAdd {
+            for (index, title) in enumerate(titlesToAdd) {
                 let label = UILabel(forAutoLayout: ())
                 
                 // Treat nil titles as fillers
 
                 if title != nil {
                     label.text = title!
+                    label.textColor = UIColor.whiteColor()
+                    label.alpha = (index == 1) ? 1.0 : 0.0
                     label.textAlignment = NSTextAlignment.Center
                     //label.backgroundColor = UIColor.greenColor()
                 }
