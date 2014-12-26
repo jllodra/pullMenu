@@ -18,8 +18,8 @@ class PullMenuTabBarProxyView: UIView {
     var items: [String] = []
     
     private var didSetupConstraints: Bool = false
-    private var labelViews: [UILabel] = []
-    private var selectedIndex: Int = 0
+    private var labels: [UILabel] = []
+    private var selectedLabelIndex: Int = 0
     
     private lazy var scrollView: UIScrollView = {
         let obj = UIScrollView(forAutoLayout: ())
@@ -54,15 +54,22 @@ class PullMenuTabBarProxyView: UIView {
         }
     }
     
+    func selectedItemIndex() -> Int?
+    {
+        let actualLabels = actualLabelViews()
+        
+        return find(items, actualLabels[selectedLabelIndex].text!)
+    }
+    
     func scrollToIndex(index: Int) {
-        if selectedIndex != index {
-            selectedIndex = index
+        if selectedLabelIndex != index {
+            selectedLabelIndex = index
             
             UIView.animateWithDuration(0.15,
                 delay: 0.0,
                 options: nil,
                 animations: {
-                    let xOffset = CGFloat(self.labelViews[index].frame.origin.x)
+                    let xOffset = CGFloat(self.labels[index].frame.origin.x)
                     self.scrollView.contentOffset = CGPointMake(xOffset, 0.0)
                 },
                 completion: nil
@@ -72,10 +79,10 @@ class PullMenuTabBarProxyView: UIView {
     
     func rebuildItems()
     {
-        if (selectedIndex > 0) {
+        if (selectedLabelIndex > 0) {
             let labels = actualLabelViews()
 
-            if let selectedLabelIndex = find(items, labels[selectedIndex].text!) {
+            if let selectedLabelIndex = find(items, labels[selectedLabelIndex].text!) {
                 var index = selectedLabelIndex
                 
                 for element in labels {
@@ -86,7 +93,7 @@ class PullMenuTabBarProxyView: UIView {
             }
         }
         
-        selectedIndex = 0
+        selectedLabelIndex = 0
         scrollView.contentOffset = CGPointMake(0.0, 0.0)
         
         updateLabelItemsAlpha(0.0)
@@ -96,22 +103,22 @@ class PullMenuTabBarProxyView: UIView {
         let labels = actualLabelViews()
 
         for (index, labelView) in enumerate(labels) {
-            labelView.alpha = index == selectedIndex ? 1.0 : min(distanceDone, 0.66)
+            labelView.alpha = index == selectedLabelIndex ? 1.0 : min(distanceDone, 0.66)
         }
     }
     
     func dimLabels() {
-        let actualLabelViews = filter(labelViews) { $0.text != nil }
+        let actualLabelViews = filter(labels) { $0.text != nil }
 
         for (index, labelView) in enumerate(actualLabelViews) {
-            if index != selectedIndex {
+            if index != selectedLabelIndex {
                 labelView.alpha = 0.0
             }
         }
     }
     
     private func actualLabelViews() -> [UILabel] {
-        return filter(labelViews) { $0.text != nil }
+        return filter(labels) { $0.text != nil }
     }
 
     override func updateConstraints() {
@@ -137,11 +144,11 @@ class PullMenuTabBarProxyView: UIView {
             
             // Remove existing labels
             
-            for view in labelViews {
+            for view in labels {
                 view.removeFromSuperview()
             }
             
-            labelViews = []
+            labels = []
             
             // Create and add labels
         
@@ -167,12 +174,12 @@ class PullMenuTabBarProxyView: UIView {
                 
                 label.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
 
-                labelViews.append(label)
+                labels.append(label)
             }
             
             dimLabels()
             
-            (labelViews as NSArray).autoDistributeViewsAlongAxis(ALAxis.Horizontal,
+            (labels as NSArray).autoDistributeViewsAlongAxis(ALAxis.Horizontal,
                 alignedTo: ALAttribute.Horizontal,
                 withFixedSpacing: 0.0,
                 insetSpacing: true,
