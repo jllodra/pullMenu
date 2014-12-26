@@ -85,7 +85,7 @@ class PullMenuTabBarProxyView: UIView {
                 }
             }
         }
-    
+        
         selectedIndex = 0
         scrollView.contentOffset = CGPointMake(0.0, 0.0)
         
@@ -162,7 +162,7 @@ class PullMenuTabBarProxyView: UIView {
                 label.autoMatchDimension(ALDimension.Width,
                     toDimension: ALDimension.Width,
                     ofView: scrollView,
-                    withMultiplier: 0.33
+                    withMultiplier: 0.333
                 )
                 
                 label.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
