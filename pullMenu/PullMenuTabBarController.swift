@@ -92,7 +92,17 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
         let targetHeight = min(height, maxHeight)
         
         if (!isDragging) {
-            selectedIndex = targetIndex
+            let selectedTitle = pullMenuTabBarProxyView.items[targetIndex]
+            
+            for (index, element) in enumerate(tabBar.items as Array!)
+            {
+                if (element.title == selectedTitle)
+                {
+                    selectedIndex = index
+                    
+                    break
+                }
+            }
 
             UIView.animateWithDuration(Config.animationTime,
                 delay: Config.animationDelay,
