@@ -162,7 +162,7 @@ class PullMenuTabBarProxyView: UIView {
                 label.autoMatchDimension(ALDimension.Width,
                     toDimension: ALDimension.Width,
                     ofView: scrollView,
-                    withMultiplier: 0.333
+                    withMultiplier: 0.3333
                 )
                 
                 label.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
