@@ -32,7 +32,9 @@ class PullMenuTabBarProxyView: UIView {
     private lazy var downArrow: UIImageView = {
         let obj = UIImageView(forAutoLayout: ())
         
-        obj.image = UIImage(named: "down53.pdf")
+        let icon = UIImage(named: "down53.pdf")
+        
+        obj.image = icon?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate).rasterizedWithColor(UIColor.whiteColor())
         
         return obj
     }()
