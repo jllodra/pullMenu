@@ -31,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		2CECF3B37AB6BDE9943E6C08 /* libPods-pullMenu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pullMenu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4501B60B1A4F006E00122DB0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4537A3FD1A4AEE43001A485D /* PullMenuUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullMenuUtils.swift; sourceTree = "<group>"; };
 		457937901A49DFD20051400A /* PullMenuTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullMenuTabBarController.swift; sourceTree = "<group>"; };
 		457937921A49DFE70051400A /* PullMenuTabBarProxyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullMenuTabBarProxyView.swift; sourceTree = "<group>"; };
@@ -142,6 +143,7 @@
 		9CC2D88997EE849F18AD8A60 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4501B60B1A4F006E00122DB0 /* MapKit.framework */,
 				2CECF3B37AB6BDE9943E6C08 /* libPods-pullMenu.a */,
 			);
 			name = Frameworks;
@@ -412,6 +414,7 @@
 			baseConfigurationReference = 8F69CBCA38234E25386DB30D /* Pods-pullMenu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = pullMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -426,6 +429,7 @@
 			baseConfigurationReference = DB1C0E42E7F2DB5C818E05C0 /* Pods-pullMenu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = pullMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

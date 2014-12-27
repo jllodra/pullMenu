@@ -28,6 +28,14 @@ class PullMenuTabBarProxyView: UIView {
         
         return obj
     }()
+    
+    private lazy var downArrow: UIImageView = {
+        let obj = UIImageView(forAutoLayout: ())
+        
+        obj.image = UIImage(named: "down53.pdf")
+        
+        return obj
+    }()
 
     private lazy var pgr: UIPanGestureRecognizer = {
         let obj = UIPanGestureRecognizer(target: self, action: "handlePanning:")
@@ -130,6 +138,24 @@ class PullMenuTabBarProxyView: UIView {
                 scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Bottom)
                 scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
                 scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
+            }
+            
+            if !contains(subviews as [UIView], downArrow) {
+                addSubview(downArrow)
+
+                downArrow.autoSetDimensionsToSize(CGSize(width: 24.8, height: 32))
+                
+                downArrow.autoPinEdge(ALEdge.Trailing,
+                    toEdge: ALEdge.Trailing,
+                    ofView: self,
+                    withOffset: -15
+                )
+
+                downArrow.autoPinEdge(ALEdge.Bottom,
+                    toEdge: ALEdge.Bottom,
+                    ofView: self,
+                    withOffset: -22
+                )
             }
 
             var titlesToAdd: [String?] = []

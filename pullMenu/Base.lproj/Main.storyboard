@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--Item 2-->
+        <!--Maps-->
         <scene sceneID="hNw-Ec-Uaa">
             <objects>
                 <viewController id="wnP-au-gdM" sceneMemberID="viewController">
@@ -15,13 +15,121 @@
                     <view key="view" contentMode="scaleToFill" id="fxm-uD-iDp">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93496227264404297" green="0.94916123151779175" blue="0.99980872869491577" alpha="1" colorSpace="calibratedRGB"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F31-jk-6JV">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">The ultimate API for iOS &amp; OS X Auto Layout — impressively simple, immensely powerful. PureLayout extends UIView/NSView, NSArray, and NSLayoutConstraint with a comprehensive Auto Layout API that is modeled after Apple's own frameworks. PureLayout is an Objective-C library that also works (and looks!) great with Swift using a bridging header.
+
+Writing Auto Layout code from scratch isn't easy. PureLayout provides a fully capable and developer-friendly interface for Auto Layout. It is designed for clarity and simplicity, and takes inspiration from the AutoLayout UI options available in Interface Builder while delivering far more flexibility. The API is also highly efficient, as it adds only a thin layer of third party code and is engineered for maximum performance.
+
+API Cheat Sheet
+
+This is just a handy overview of the core API methods. Explore the header files for the full API, and find the complete documentation above the implementation of each method in the corresponding .m file. A couple of notes:
+
+All of the API methods are namespaced with the prefix auto..., which also allows for easy autocompletion in Xcode!
+Methods that create constraints also automatically install (activate) the constraint(s), then return the new constraint(s) for you to optionally store for later adjustment or removal.
+Many methods below also have a variant which includes a relation: parameter to make the constraint an inequality.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="F31-jk-6JV" firstAttribute="leading" secondItem="fxm-uD-iDp" secondAttribute="leading" id="QFh-05-1Jl"/>
+                            <constraint firstAttribute="trailing" secondItem="F31-jk-6JV" secondAttribute="trailing" id="aox-Dp-wl3"/>
+                            <constraint firstItem="F31-jk-6JV" firstAttribute="top" secondItem="fxm-uD-iDp" secondAttribute="top" id="ff2-M4-1pu"/>
+                            <constraint firstItem="F31-jk-6JV" firstAttribute="bottom" secondItem="ISC-YT-8NJ" secondAttribute="top" id="yye-xP-D8I"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="gBV-Et-Qtl"/>
+                    <tabBarItem key="tabBarItem" title="Maps" id="gBV-Et-Qtl"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qpQ-le-cia" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="755" y="703"/>
+            <point key="canvasLocation" x="1017" y="305"/>
+        </scene>
+        <!--Credits-->
+        <scene sceneID="jqx-50-lBT">
+            <objects>
+                <viewController id="bIx-Gg-wwu" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bRv-7i-nss"/>
+                        <viewControllerLayoutGuide type="bottom" id="BHM-dX-2me"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="53d-4y-cfz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EKu-ex-TZV">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">Problems, Suggestions, Pull Requests?
+
+Bring 'em on! :)
+
+If you're considering taking on significant changes or additions to the project, it's always a good idea to communicate in advance (open a new Issue here). This allows everyone to get onboard with upcoming changes, ensures that changes align with the project's design philosophy, and avoids duplicated work.
+
+I'm especially interested in hearing about any common use cases that this API does not currently address. Feel free to add feature requests (and view current work in progress) on the Feature Requests page of the wiki for this project.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="EKu-ex-TZV" firstAttribute="top" secondItem="53d-4y-cfz" secondAttribute="top" id="0gk-oH-qwX"/>
+                            <constraint firstAttribute="trailing" secondItem="EKu-ex-TZV" secondAttribute="trailing" id="DkF-Xa-EXM"/>
+                            <constraint firstItem="EKu-ex-TZV" firstAttribute="leading" secondItem="53d-4y-cfz" secondAttribute="leading" id="e4h-pg-Y3J"/>
+                            <constraint firstItem="EKu-ex-TZV" firstAttribute="bottom" secondItem="BHM-dX-2me" secondAttribute="top" id="sAE-8g-23I"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Credits" id="zz4-JZ-5gh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jmO-Y2-NEh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-158" y="1089"/>
+        </scene>
+        <!--Tips-->
+        <scene sceneID="9Kt-XH-QeC">
+            <objects>
+                <viewController id="y2t-sd-KJh" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UC3-cH-ujA"/>
+                        <viewControllerLayoutGuide type="bottom" id="A5o-34-HJY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PWF-Rx-KLN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fiu-qZ-e1K">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">Example Project
+
+Check out the example project included in the repository (requires Xcode 6 or higher). It contains iOS and OS X demos of the API being used in various scenarios.
+
+On iOS, you can use different device simulators and rotate the device to see the constraints in action (as well as toggle the taller in-call status bar in the iOS Simulator).
+
+On OS X, while running the app, press any key to cycle through the demos. You can resize the window to see the constraints in action.
+
+Tips and Tricks
+
+Check out some Tips and Tricks to keep in mind when using the API.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Fiu-qZ-e1K" secondAttribute="trailing" id="5ya-7K-gzq"/>
+                            <constraint firstItem="Fiu-qZ-e1K" firstAttribute="bottom" secondItem="A5o-34-HJY" secondAttribute="top" id="7QO-eD-Naj"/>
+                            <constraint firstItem="Fiu-qZ-e1K" firstAttribute="leading" secondItem="PWF-Rx-KLN" secondAttribute="leading" id="Ei4-tm-efy"/>
+                            <constraint firstItem="Fiu-qZ-e1K" firstAttribute="top" secondItem="PWF-Rx-KLN" secondAttribute="top" id="S79-Mp-cYT"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Tips" id="KuL-Lk-w8Z"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q6v-fi-EJ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="525" y="982"/>
         </scene>
         <!--About me-->
         <scene sceneID="J1W-iM-Hi5">
@@ -34,15 +142,40 @@
                     <view key="view" contentMode="scaleToFill" id="ZnO-hy-ji1">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CwB-qF-oU8">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">The ultimate API for iOS &amp; OS X Auto Layout — impressively simple, immensely powerful. PureLayout extends UIView/NSView, NSArray, and NSLayoutConstraint with a comprehensive Auto Layout API that is modeled after Apple's own frameworks. PureLayout is an Objective-C library that also works (and looks!) great with Swift using a bridging header.
+
+Writing Auto Layout code from scratch isn't easy. PureLayout provides a fully capable and developer-friendly interface for Auto Layout. It is designed for clarity and simplicity, and takes inspiration from the AutoLayout UI options available in Interface Builder while delivering far more flexibility. The API is also highly efficient, as it adds only a thin layer of third party code and is engineered for maximum performance.
+
+API Cheat Sheet
+
+This is just a handy overview of the core API methods. Explore the header files for the full API, and find the complete documentation above the implementation of each method in the corresponding .m file. A couple of notes:
+
+All of the API methods are namespaced with the prefix auto..., which also allows for easy autocompletion in Xcode!
+Methods that create constraints also automatically install (activate) the constraint(s), then return the new constraint(s) for you to optionally store for later adjustment or removal.
+Many methods below also have a variant which includes a relation: parameter to make the constraint an inequality.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="CwB-qF-oU8" firstAttribute="top" secondItem="ZnO-hy-ji1" secondAttribute="top" id="2e7-Wi-wlN"/>
+                            <constraint firstAttribute="trailing" secondItem="CwB-qF-oU8" secondAttribute="trailing" id="EmL-9p-wxP"/>
+                            <constraint firstItem="CwB-qF-oU8" firstAttribute="leading" secondItem="ZnO-hy-ji1" secondAttribute="leading" id="HIR-1l-JZg"/>
+                            <constraint firstItem="CwB-qF-oU8" firstAttribute="bottom" secondItem="9Pz-fS-vNf" secondAttribute="top" id="l7Y-Vv-ZSN"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="About me" id="lw7-cc-fnU"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KPp-7F-c1a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="336" y="1158"/>
+            <point key="canvasLocation" x="1017" y="967"/>
         </scene>
-        <!--Item 1-->
+        <!--Overview-->
         <scene sceneID="brs-RK-zaL">
             <objects>
                 <viewController id="e28-Pc-mbF" sceneMemberID="viewController">
@@ -53,13 +186,38 @@
                     <view key="view" contentMode="scaleToFill" id="ABY-r0-c5t">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hYj-Yu-qHh">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">App Extensions
+
+When using PureLayout in an App Extension, define the preprocessor macro PURELAYOUT_APP_EXTENSIONS in the Build Settings of your App Extension's target to prevent usage of unavailable APIs. Click here for more info.
+
+Releases
+
+Releases are tagged in the git commit history using semantic versioning. Check out the releases and release notes for each version.
+
+Upgrading from v1.x to v2.0?
+
+Upgrading from v1.x of the library to v2.0 should be a very simple and easy process. Please review the migration guide for more information.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" red="0.91261130571365356" green="0.95325356721878052" blue="0.89679992198944092" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="hYj-Yu-qHh" firstAttribute="bottom" secondItem="JEG-xg-EFw" secondAttribute="top" id="5nI-eb-Hpm"/>
+                            <constraint firstItem="hYj-Yu-qHh" firstAttribute="top" secondItem="ABY-r0-c5t" secondAttribute="top" id="OeY-Up-ntk"/>
+                            <constraint firstAttribute="trailing" secondItem="hYj-Yu-qHh" secondAttribute="trailing" id="SFL-Bb-oAY"/>
+                            <constraint firstItem="hYj-Yu-qHh" firstAttribute="leading" secondItem="ABY-r0-c5t" secondAttribute="leading" id="pmK-PE-NZx"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="PRM-0t-5TN"/>
+                    <tabBarItem key="tabBarItem" title="Overview" id="PRM-0t-5TN"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k2B-Vk-1JT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="755" y="41"/>
+            <point key="canvasLocation" x="1017" y="-351"/>
         </scene>
         <!--Pull Menu Tab Bar Controller-->
         <scene sceneID="xoQ-jl-Tx5">
@@ -75,6 +233,8 @@
                         <segue destination="e28-Pc-mbF" kind="relationship" relationship="viewControllers" id="F7W-nb-ptI"/>
                         <segue destination="wnP-au-gdM" kind="relationship" relationship="viewControllers" id="Hcr-OS-LWc"/>
                         <segue destination="AlY-Rf-inp" kind="relationship" relationship="viewControllers" id="SaD-4t-5Yo"/>
+                        <segue destination="bIx-Gg-wwu" kind="relationship" relationship="viewControllers" id="3iw-X7-Soo"/>
+                        <segue destination="y2t-sd-KJh" kind="relationship" relationship="viewControllers" id="sdS-tI-8a2"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bBz-4j-fSd" userLabel="First Responder" sceneMemberID="firstResponder"/>
