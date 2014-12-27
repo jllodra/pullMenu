@@ -93,6 +93,7 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
         
         if (!isDragging) {
             selectedIndex = pullMenuTabBarProxyView.selectedItemIndex() ?? 0
+            pullMenuTabBarProxyView.rebuildItems()
 
             UIView.animateWithDuration(Config.animationTime,
                 delay: Config.animationDelay,
@@ -106,7 +107,6 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
                 },
                 completion: {
                     done in
-                    pullMenuTabBarProxyView.rebuildItems()
                 }
             )
             
