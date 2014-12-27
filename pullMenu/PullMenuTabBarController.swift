@@ -14,7 +14,7 @@ class PullMenuTabBarController: UITabBarController, PullMenuTabBarProxyViewDeleg
         static let menuViewHeight: CGFloat = 80.0
         static let animationTime: NSTimeInterval = 0.5
         static let animationDelay: NSTimeInterval = 0.0
-        static let animationSpringWithDamping: CGFloat = 0.3
+        static let animationSpringWithDamping: CGFloat = 0.55
         static let animationInitialSpringVelocity: CGFloat = 0.5
     }
     
