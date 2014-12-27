@@ -89,7 +89,9 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
 
     func pullMenuTabBarProxyView(pullMenuTabBarProxyView: PullMenuTabBarProxyView, wantsToChangeHeightTo height: CGFloat, isDragging: Bool) {
         let maxHeight = view.frame.height / 2.0
-        let targetHeight = min(height, maxHeight)
+        let targetHeight = max(min(height, maxHeight), Config.menuViewHeight)
+        
+        println(targetHeight)
         
         if (!isDragging) {
             selectedIndex = pullMenuTabBarProxyView.selectedItemIndex() ?? 0
