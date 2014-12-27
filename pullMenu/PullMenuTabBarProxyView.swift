@@ -143,7 +143,7 @@ class PullMenuTabBarProxyView: UIView {
             if !contains(subviews as [UIView], downArrow) {
                 addSubview(downArrow)
 
-                downArrow.autoSetDimensionsToSize(CGSize(width: 24.8, height: 32))
+                downArrow.autoSetDimensionsToSize(CGSize(width: 24, height: 24))
                 
                 downArrow.autoPinEdge(ALEdge.Trailing,
                     toEdge: ALEdge.Trailing,
@@ -154,7 +154,7 @@ class PullMenuTabBarProxyView: UIView {
                 downArrow.autoPinEdge(ALEdge.Bottom,
                     toEdge: ALEdge.Bottom,
                     ofView: self,
-                    withOffset: -22
+                    withOffset: -24
                 )
             }
 
