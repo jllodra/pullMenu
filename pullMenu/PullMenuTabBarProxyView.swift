@@ -115,6 +115,8 @@ class PullMenuTabBarProxyView: UIView {
         for (index, labelView) in enumerate(labels) {
             labelView.alpha = index == selectedLabelIndex ? 1.0 : min(distanceDone, 0.66)
         }
+        
+        downArrow.alpha = max(0, 1.0 - distanceDone*4)
     }
     
     func dimLabels() {
@@ -125,6 +127,9 @@ class PullMenuTabBarProxyView: UIView {
                 labelView.alpha = 0.0
             }
         }
+        
+        downArrow.alpha = 1.0
+
     }
     
     private func actualLabelViews() -> [UILabel] {
