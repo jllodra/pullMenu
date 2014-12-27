@@ -11,8 +11,6 @@ import Foundation
 extension UIImage {
     
     func rasterizedWithColor(color: UIColor) -> UIImage? {
-        var rasterizedImage: UIImage?
-        
         if self.renderingMode != UIImageRenderingMode.AlwaysTemplate
         {
             return nil
@@ -26,7 +24,7 @@ extension UIImage {
         
         drawInRect(imageBounds)
         
-        rasterizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        var rasterizedImage = UIGraphicsGetImageFromCurrentImageContext()
         
         UIGraphicsEndImageContext()
         
