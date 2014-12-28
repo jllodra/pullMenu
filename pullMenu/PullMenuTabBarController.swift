@@ -70,8 +70,7 @@ class PullMenuTabBarController: UITabBarController, PullMenuTabBarProxyViewDeleg
     
     override func viewDidLoad() {
         tabBar.hidden = true
-        tabBarProxyView.backgroundColor = UIColor.darkGrayColor()
-        // This will set the statusBar background color
+        // This will set both the statusBar and proxyTabBar background color
         view.backgroundColor = UIColor.darkGrayColor()
         addControls()
     }
