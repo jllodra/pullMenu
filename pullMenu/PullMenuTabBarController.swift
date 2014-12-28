@@ -28,7 +28,6 @@ class PullMenuTabBarController: UITabBarController, PullMenuTabBarProxyViewDeleg
         let obj = PullMenuTabBarProxyView(forAutoLayout: ())
         
         obj.delegate = self
-        obj.controller = self
         
         for element in self.tabBar.items as [UITabBarItem]
         {
@@ -42,6 +41,9 @@ class PullMenuTabBarController: UITabBarController, PullMenuTabBarProxyViewDeleg
     
     override func updateViewConstraints() {
         if (!didSetupConstraints) {
+            // Do not overlap status bar
+            
+            tabBarProxyView.autoPinToTopLayoutGuideOfViewController(self, withInset: 0.0)
             tabBarProxyView.autoPinEdgeToSuperviewEdge(ALEdge.Top)
             tabBarProxyView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
             tabBarProxyView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)

@@ -15,7 +15,6 @@ protocol PullMenuTabBarProxyViewDelegate {
 class PullMenuTabBarProxyView: UIView {
 
     var delegate: PullMenuTabBarProxyViewDelegate?
-    var controller: PullMenuTabBarController?
     
     var items: [String] = []
     
@@ -143,10 +142,7 @@ class PullMenuTabBarProxyView: UIView {
             if !contains(subviews as [UIView], scrollView) {
                 addSubview(scrollView)
                 
-                // Do not overlap status bar
-
-                scrollView.autoPinToTopLayoutGuideOfViewController(self.controller, withInset: 0.0)
-                
+                scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Top)
                 scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Bottom)
                 scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
                 scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
