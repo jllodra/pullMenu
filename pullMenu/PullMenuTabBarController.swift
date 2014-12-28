@@ -44,7 +44,6 @@ class PullMenuTabBarController: UITabBarController, PullMenuTabBarProxyViewDeleg
             // Do not overlap status bar
             
             tabBarProxyView.autoPinToTopLayoutGuideOfViewController(self, withInset: 0.0)
-            tabBarProxyView.autoPinEdgeToSuperviewEdge(ALEdge.Top)
             tabBarProxyView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
             tabBarProxyView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
             
@@ -71,8 +70,10 @@ class PullMenuTabBarController: UITabBarController, PullMenuTabBarProxyViewDeleg
     
     override func viewDidLoad() {
         tabBar.hidden = true
+        tabBarProxyView.backgroundColor = UIColor.darkGrayColor()
+        // This will set the statusBar background color
+        view.backgroundColor = UIColor.darkGrayColor()
         addControls()
-        debug()
     }
 
     // MARK: Private Methods
@@ -82,10 +83,6 @@ class PullMenuTabBarController: UITabBarController, PullMenuTabBarProxyViewDeleg
         view.setNeedsUpdateConstraints()
     }
     
-    private func debug() {
-        view.backgroundColor = UIColor.grayColor()
-        tabBarProxyView.backgroundColor = UIColor.darkGrayColor()
-    }
 }
 
 extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
