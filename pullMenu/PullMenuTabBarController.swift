@@ -28,6 +28,7 @@ class PullMenuTabBarController: UITabBarController, PullMenuTabBarProxyViewDeleg
         let obj = PullMenuTabBarProxyView(forAutoLayout: ())
         
         obj.delegate = self
+        obj.controller = self
         
         for element in self.tabBar.items as [UITabBarItem]
         {
@@ -86,11 +87,11 @@ class PullMenuTabBarController: UITabBarController, PullMenuTabBarProxyViewDeleg
 }
 
 extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
-
+    
     func pullMenuTabBarProxyView(pullMenuTabBarProxyView: PullMenuTabBarProxyView, wantsToChangeHeightTo height: CGFloat, isDragging: Bool) {
         let maxHeight = view.frame.height / 2.0
         let targetHeight = max(min(height, maxHeight), Config.menuViewHeight)
-                
+
         if (!isDragging) {
             selectedIndex = pullMenuTabBarProxyView.selectedItemIndex() ?? 0
             pullMenuTabBarProxyView.rebuildItems()
@@ -109,7 +110,7 @@ extension PullMenuTabBarController : PullMenuTabBarProxyViewDelegate {
                     done in
                 }
             )
-                        
+
         } else {
             let tabBarItems = pullMenuTabBarProxyView.items
             

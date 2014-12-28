@@ -15,6 +15,8 @@ protocol PullMenuTabBarProxyViewDelegate {
 class PullMenuTabBarProxyView: UIView {
 
     var delegate: PullMenuTabBarProxyViewDelegate?
+    var controller: PullMenuTabBarController?
+    
     var items: [String] = []
     
     private var didSetupConstraints: Bool = false
@@ -141,29 +143,16 @@ class PullMenuTabBarProxyView: UIView {
             if !contains(subviews as [UIView], scrollView) {
                 addSubview(scrollView)
                 
-                scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Top)
+                // Do not overlap status bar
+
+                scrollView.autoPinToTopLayoutGuideOfViewController(self.controller, withInset: 0.0)
+                
                 scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Bottom)
                 scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Leading)
                 scrollView.autoPinEdgeToSuperviewEdge(ALEdge.Trailing)
             }
             
-            if !contains(subviews as [UIView], downArrow) {
-                addSubview(downArrow)
 
-                downArrow.autoSetDimensionsToSize(CGSize(width: 24, height: 24))
-                
-                downArrow.autoPinEdge(ALEdge.Trailing,
-                    toEdge: ALEdge.Trailing,
-                    ofView: self,
-                    withOffset: -15
-                )
-
-                downArrow.autoPinEdge(ALEdge.Bottom,
-                    toEdge: ALEdge.Bottom,
-                    ofView: self,
-                    withOffset: -24
-                )
-            }
 
             var titlesToAdd: [String?] = []
             
@@ -209,6 +198,24 @@ class PullMenuTabBarProxyView: UIView {
 
                 labels.append(label)
             }
+            
+            
+            if !contains(subviews as [UIView], downArrow) {
+                addSubview(downArrow)
+                
+                downArrow.autoSetDimensionsToSize(CGSize(width: 24, height: 24))
+                
+                downArrow.autoAlignAxis(ALAxis.Baseline, toSameAxisOfView: labels[0], withOffset: 16.0)
+                
+                downArrow.autoPinEdge(ALEdge.Trailing,
+                    toEdge: ALEdge.Trailing,
+                    ofView: self,
+                    withOffset: -15
+                )
+                
+            }
+            
+            
             
             dimLabels()
             
